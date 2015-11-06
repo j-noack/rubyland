@@ -4,7 +4,7 @@ class Player < AbstractBeing
 
     def initialize
         super
-        @spriteImage = Gosu::Image.new("Player.jpg")
+        @spriteImage = Gosu::Image.new("assets/player_sprite.bmp")
     end
 
     def move(a,b)

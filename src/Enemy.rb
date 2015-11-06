@@ -1,5 +1,5 @@
-require './AbstractBeing.rb'
-require './EnemyAI.rb'
+require_relative 'AbstractBeing.rb'
+require_relative 'EnemyAI.rb'
 
 class Enemy < AbstractBeing
 
@@ -10,7 +10,7 @@ class Enemy < AbstractBeing
         @target = nil
         @ai = EnemyAI.new(self)
         @sprite = "assets/enemy_1.png"
-        @spriteImage = Gosu::Image.new(@enemyType.sprite)
+        @spriteImage = Gosu::Image.new(@sprite)
     end
 
     def update

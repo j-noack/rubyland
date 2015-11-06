@@ -25,7 +25,8 @@ class GameWindow < Gosu::Window
 
     def update
         @collisionManager.update
-
+        @map.update
+        
         #Player Controls:
         if Gosu::button_down? Gosu::KbW
           @map.player.move(0,-1)
