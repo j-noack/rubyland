@@ -19,7 +19,7 @@ class GameWindow < Gosu::Window
         @map = Map.new(640, 480 - @highscore.height)
         @map.y = @highscore.height
 
-        @collisionManager = CollisionManager.new
+        @collisionManager = CollisionManager.new(@map)
 
     end
 
