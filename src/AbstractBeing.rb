@@ -2,7 +2,7 @@ require './src/Drawable.rb'
 
 class AbstractBeing < Drawable
 
-    attr_accessor :spee
+    attr_accessor :speed
     attr_accessor :sprite
     attr_accessor :hp
     attr_accessor :weapon
