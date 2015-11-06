@@ -23,9 +23,13 @@ class GameWindow < Gosu::Window
 
     end
 
-    def update
-        @collisionManager.update
 
+    def button_down(id)
+    end
+
+    def update
+      @collisionManager.update
+      @map.update  
     end
 
     def draw
@@ -33,8 +37,7 @@ class GameWindow < Gosu::Window
         @map.draw
     end
 
-    def button_down(id)
-    end
+
 
 end
 
