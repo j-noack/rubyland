@@ -1,0 +1,29 @@
+require './src/Drawable.rb'
+
+class AbstractBeing < Drawable
+
+<<<<<<< HEAD
+    attr_accessor :speed
+=======
+    attr_accessor :spee
+>>>>>>> b6f77befd90cb5cd892fdad621b71319437ad698
+    attr_accessor :sprite
+    attr_accessor :hp
+    attr_accessor :weapon
+
+    def initialize
+        super
+
+        @z = 5
+        @speed = 5
+        @sprite = ""
+        @hp = 1
+        @weapon = nil
+    end
+
+    def damage
+        return 5
+    end
+
+
+end
