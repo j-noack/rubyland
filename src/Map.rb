@@ -12,6 +12,9 @@ class Map < Drawable
         @width = width
         @height = height
         @player = Player.new
+        @player.x = width / 2
+        @player.y = height / 2
+
         @enemies = []
         @backgroundImage = Gosu::Image.new("boxhead.jpg")
     end
@@ -21,6 +24,7 @@ class Map < Drawable
 
     def draw
         @backgroundImage.draw(@x, @y, @z)
+        @player.draw
     end
 
 end
