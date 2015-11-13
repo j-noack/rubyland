@@ -7,30 +7,12 @@ class EnemyAI
   end
 
   def update
-    @enemy.x += @enemy.speed * ratioX
-    @enemy.y += @enemy.speed * ratioY
-  end
-
-  def ratioX
-    target = @enemy.target
-    deltaX = @enemy.x - target.x
-    deltaY = @enemy.y - target.y
-    if (deltaY != 0)
-      return deltaX / deltaY
-    else
-      return deltaX
-    end
-  end
-
-  def ratioY
-    target = @enemy.target
-    deltaX = @enemy.x - target.x
-    deltaY = @enemy.y - target.y
-    if (deltaX != 0)
-      return deltaY / deltaX
-    else
-      return deltaY
-    end
+	distance = Math.sqrt(((@enemy.target.x - @enemy.x)**2) + ((@enemy.target.y - @enemy.y)**2))
+	if (distance != 0)
+		ratio = @enemy.speed / distance
+		@enemy.x += (@enemy.target.x - @enemy.x) * ratio
+		@enemy.y += (@enemy.target.y - @enemy.y) * ratio
+	end
   end
 
 end
