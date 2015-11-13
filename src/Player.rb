@@ -19,8 +19,10 @@ class Player < AbstractBeing
 				@keyD = 0
 		end
 
-		def	update(focus_x, focus_y)
-			super
+		def	update(focus_x, focus_y, offsetX, offsetY)
+			focus_y -= offsetY
+			focus_x -= offsetX
+			super(focus_x, focus_y)
 			@crosshair.update(focus_x, focus_y)
 			@keyW = Gosu::button_down?(Gosu::KbW) ? 1 : 0
 			@keyS = Gosu::button_down?(Gosu::KbS) ? 1 : 0
@@ -47,6 +49,6 @@ class Player < AbstractBeing
 
 		def draw(offsetX, offsetY)
 			super
-			@crosshair.draw
+			@crosshair.draw(offsetX, offsetY)
 		end
 end

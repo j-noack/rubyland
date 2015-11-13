@@ -27,7 +27,7 @@ class Map < Drawable
     end
 
     def update(mouse_x, mouse_y)
-      @player.update(mouse_x, mouse_y)
+      @player.update(mouse_x, mouse_y, self.x, self.y)
       if @collisionManager.canPlayerMove?
         @player.move
       end
