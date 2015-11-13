@@ -25,8 +25,12 @@ class Player < AbstractBeing
 		end
 
     def move
-      @x += (@keyD - @keyA) * (@speed - Math.sqrt((((@keyS - @keyW) * @speed)**2)/2))
-      @y += (@keyS - @keyW) * (@speed - Math.sqrt((((@keyD - @keyA) * @speed)**2)/2))
+			a = Math.sqrt((((@keyS - @keyW) * @speed) ** 2 ) / 2)
+			b = Math.sqrt((((@keyD - @keyA) * @speed) ** 2 ) / 2)
+			a = (a == 0) ? @speed : a
+			b = (b == 0) ? @speed : b
+      @x += (@keyD - @keyA) * a
+      @y += (@keyS - @keyW) * b
     end
 
     # angle = 0, center_x = 0.5, center_y = 0.5, scale_x = 1, scale_y = 1, color = 0xff_ffffff, mode = :default)
