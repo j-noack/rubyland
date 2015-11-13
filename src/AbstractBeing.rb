@@ -9,7 +9,7 @@ class AbstractBeing < Drawable
     def initialize
         super
         @z = 5
-        @speed = 5
+        @speed = 2
         @hp = 1
         @weapon = nil
     end

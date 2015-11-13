@@ -34,12 +34,12 @@ class EnemyGenerator
     mapW = @map.width
     mapH = @map.height
 
-    10.times do |i|
+    100.times do |i|
       enemy = Enemy.new
       enemy.x = rand(mapW)
       enemy.y = rand(mapH)
       enemy.target = @target
-      enemy.speed = 1
+      enemy.speed = rand(150) * 0.01 + 0.1
 
       enemies << enemy
     end
