@@ -1,6 +1,6 @@
-require './src/Drawable.rb'
-require './src/Player.rb'
-require './src/EnemyGenerator.rb'
+require_relative 'Drawable.rb'
+require_relative 'Player.rb'
+require_relative 'EnemyGenerator.rb'
 
 class Map < Drawable
 

@@ -18,7 +18,7 @@ class Enemy < AbstractBeing
     end
 
     def draw
-      @spriteImage.draw(@x, @y, @z)
+      @spriteImage.draw_rot(@x, @y, @z, angle = 0.0)
     end
 
 end

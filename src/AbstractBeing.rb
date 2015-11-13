@@ -1,4 +1,4 @@
-require './src/Drawable.rb'
+require_relative 'Drawable.rb'
 
 class AbstractBeing < Drawable
 

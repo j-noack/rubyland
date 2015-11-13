@@ -1,22 +1,23 @@
 require 'gosu'
-require './src/Highscore.rb'
-require './src/Map.rb'
-require './src/CollisionManager.rb'
+require_relative 'src/Highscore.rb'
+require_relative 'src/Map.rb'
+require_relative 'src/CollisionManager.rb'
 
 class GameWindow < Gosu::Window
+    @@VERSION = "0.1 ALPHA"
 
     attr_accessor :map
     attr_accessor :highscore
     attr_accessor :collisionManager
 
     def initialize
-        super(640, 480)
-        self.caption = "Rubyland"
+        super(1024, 768)
+        self.caption = "Rubyland #{@@VERSION}"
 
         @highscore = Highscore.new
         @highscore.height = 480 / 10
 
-        @map = Map.new(640, 480 - @highscore.height)
+        @map = Map.new(1024, 768 - @highscore.height)
         @map.y = @highscore.height
 
         @collisionManager = CollisionManager.new(@map)
@@ -26,7 +27,7 @@ class GameWindow < Gosu::Window
     def update
         @collisionManager.update
         @map.update
-        
+
         #Player Controls:
         if Gosu::button_down? Gosu::KbW
           @map.player.move(0,-1)
