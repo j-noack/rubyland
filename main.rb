@@ -17,16 +17,13 @@ class GameWindow < Gosu::Window
         @font = Gosu::Font.new(25, { :name => "assets/Amble-Regular.ttf" })
 
         @highscore = Highscore.new
-        @highscore.height = 32
 
-        @map = Map.new(1024, 768 - @highscore.height)
-        @map.y = @highscore.height
-
-        @collisionManager = CollisionManager.new(@map)
+        mapOffsetY = 32
+        @map = Map.new(1024, 768 - mapOffsetY, 8)
+        @map.y = mapOffsetY
     end
 
     def update
-        @collisionManager.update
         @map.update(mouse_x, mouse_y)
         @highscore.update
     end
@@ -34,6 +31,7 @@ class GameWindow < Gosu::Window
     def draw
         @highscore.draw(@font)
         @map.draw(@font)
+        @font.draw("Fps: #{Gosu::fps.to_i}", 1024 - 75, 4 ,999)
     end
 
     def button_down(id)

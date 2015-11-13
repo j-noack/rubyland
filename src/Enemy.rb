@@ -9,16 +9,11 @@ class Enemy < AbstractBeing
         super
         @target = nil
         @ai = EnemyAI.new(self)
-        @sprite = "assets/enemy_1.png"
-        @spriteImage = Gosu::Image.new(@sprite)
+        loadSprite("assets/Enemy.bmp")
     end
 
     def update
       @ai.update
-    end
-
-    def draw
-      @spriteImage.draw_rot(@x, @y, @z, angle = 0.0)
     end
 
 end
