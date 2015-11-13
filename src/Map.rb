@@ -28,7 +28,7 @@ class Map < Drawable
       end
     end
 
-    def draw
+    def draw(font)
         @backgroundImage.draw(@x, @y, @z)
 
         @enemies.each do |enemy|

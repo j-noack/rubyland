@@ -14,6 +14,8 @@ class GameWindow < Gosu::Window
         super(1024, 768)
         self.caption = "Rubyland #{@@VERSION}"
 
+        @font = Gosu::Font.new(25, { :name => "assets/Amble-Regular.ttf" })
+
         @highscore = Highscore.new
         @highscore.height = 480 / 10
 
@@ -21,13 +23,13 @@ class GameWindow < Gosu::Window
         @map.y = @highscore.height
 
         @collisionManager = CollisionManager.new(@map)
-
     end
 
     def update
         @collisionManager.update
         @map.update
-
+        @highscore.update
+        
         #Player Controls:
         if Gosu::button_down? Gosu::KbW
           @map.player.move(0,-1)
@@ -44,8 +46,8 @@ class GameWindow < Gosu::Window
     end
 
     def draw
-        @highscore.draw
-        @map.draw
+        @highscore.draw(@font)
+        @map.draw(@font)
     end
 
     def button_down(id)
