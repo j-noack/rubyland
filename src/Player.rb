@@ -1,4 +1,4 @@
-require './src/AbstractBeing.rb'
+require_relative 'AbstractBeing.rb'
 
 class Player < AbstractBeing
 
@@ -34,7 +34,7 @@ class Player < AbstractBeing
 	
     # angle = 0, center_x = 0.5, center_y = 0.5, scale_x = 1, scale_y = 1, color = 0xff_ffffff, mode = :default)
     def draw
-      @spriteImage.draw_rot(@x, @y, @z, angle=0.0)
+      @spriteImage.draw_rot(@x, @y, @z, angle = 0.0)
     end
 
 end

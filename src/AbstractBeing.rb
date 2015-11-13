@@ -1,4 +1,4 @@
-require './src/Drawable.rb'
+require_relative 'Drawable.rb'
 
 class AbstractBeing < Drawable
 
@@ -9,7 +9,6 @@ class AbstractBeing < Drawable
 
     def initialize
         super
-
         @z = 5
         @speed = 5
         @sprite = ""
