@@ -5,7 +5,9 @@ class Crosshair < Drawable
 
   def initialize
     super
+    @spriteImage = Gosu::Image.new("assets/Crosshair.bmp")
   end
+
 
   def upadate
     @y = mouse_y
