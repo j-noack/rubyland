@@ -17,7 +17,7 @@ class GameWindow < Gosu::Window
         @font = Gosu::Font.new(25, { :name => "assets/Amble-Regular.ttf" })
 
         @highscore = Highscore.new
-        @highscore.height = 480 / 10
+        @highscore.height = 32
 
         @map = Map.new(1024, 768 - @highscore.height)
         @map.y = @highscore.height
@@ -38,8 +38,8 @@ class GameWindow < Gosu::Window
 
     def button_down(id)
       if id == Gosu::KbEscape
-      # msp.player.move(x, y)
-    end
+        close
+      end
     end
 
 end
