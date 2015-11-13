@@ -7,12 +7,10 @@ class CollisionManager
 		@map = map
 	end
 
-    def update
-		# player => @map.player
-		# enemies => @map.enemies
-
-
-    end
+	def canPlayerMove?
+		player = @map.player
+		return !mapBorderCollision(player.calcNewX, player.calcNewY, player.width, player.height)
+	end
 
 	def checkCircleCollision(obj1, obj2)
 		if (getDistance(obj1, obj2) < (obj1.width / 2) + (obj2.width / 2))
@@ -26,40 +24,40 @@ class CollisionManager
 		return Math.sqrt(((obj1.x - obj2.x) ** 2) + ((obj1.y - obj2.y) ** 2))
 	end
 
-	def mapBorderCollision(map, obj)
-		if (checkLeft(obj) || checkRight(obj, map) || checkUp(obj) || checkDown(obj, map))
+	def mapBorderCollision(x, y, w, h)
+		if (checkLeft(x, w) || checkRight(x, w) || checkUp(y, h) || checkDown(y, h))
 			return true
 		else
 			return false
 		end
 	end
 
-	def checkLeft(obj)
-		if (obj.x - obj.width < 0)
+	def checkLeft(x, w)
+		if (x - (w / 2) < @map.borderWidth)
 			return true
 		else
 			return false
 		end
 	end
 
-	def checkRight(obj, map)
-		if (obj.x + obj.width > map.width)
+	def checkRight(x, w)
+		if (x + (w / 2) > @map.width - @map.borderWidth)
 			return true
 		else
 			return false
 		end
 	end
 
-	def checkUp(obj)
-		if (obj.y - obj.height < 0)
+	def checkUp(y, h)
+		if (y - (h / 2) < @map.borderWidth)
 			return true
 		else
 			return false
 		end
 	end
 
-	def checkDown(obj, map)
-		if (obj.y + obj.height > map.height)
+	def checkDown(y, h)
+		if (y + (h / 2) > @map.height - @map.borderWidth)
 			return true
 		else
 			return false

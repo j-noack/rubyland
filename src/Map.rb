@@ -6,24 +6,31 @@ class Map < Drawable
 
     attr_accessor :player
     attr_accessor :enemies
+    attr_accessor :borderWidth
 
-    def initialize(width, height)
+    def initialize(width, height, borderWidth)
         super()
 
         @width = width
         @height = height
+        @borderWidth = borderWidth
         @player = Player.new
         @player.x = width / 2
         @player.y = height / 2
 
-        @enemyGenerator = EnemyGenerator.new(@player)
+        @enemyGenerator = EnemyGenerator.new(self, @player)
         @enemies = @enemyGenerator.generate
 
+        @collisionManager = CollisionManager.new(self)
         @backgroundImage = Gosu::Image.new("assets/Rubyland.bmp")
     end
 
     def update
       @player.update
+
+      if @collisionManager.canPlayerMove?
+        @player.move
+      end
 
       @enemies.each do |enemy|
         enemy.update
@@ -34,10 +41,10 @@ class Map < Drawable
         @backgroundImage.draw(@x, @y, @z)
 
         @enemies.each do |enemy|
-          enemy.draw
+          enemy.draw(self.x, self.y)
         end
 
-        @player.draw
+        @player.draw(self.x, self.y)
     end
 
 end
