@@ -1,6 +1,5 @@
 require_relative 'Drawable.rb'
 
-
 class Crosshair < Drawable
 
   def initialize
@@ -8,7 +7,6 @@ class Crosshair < Drawable
     @spriteImage = Gosu::Image.new("assets/Crosshair.bmp")
 
   end
-
 
   def update(mouse_x, mouse_y)
     @y = mouse_y
