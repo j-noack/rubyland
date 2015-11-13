@@ -9,7 +9,6 @@ class AbstractBeing < Drawable
 
     def initialize
         super
-
         @z = 5
         @speed = 5
         @sprite = ""

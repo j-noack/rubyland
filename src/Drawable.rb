@@ -13,7 +13,7 @@ class Drawable
         @height = 0
     end
 
-    def draw
+    def draw(font)
     end
 
 end
