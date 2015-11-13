@@ -27,7 +27,7 @@ class GameWindow < Gosu::Window
 
     def update
         @collisionManager.update
-        @map.update
+        @map.update(mouse_x, mouse_y)
         @highscore.update
     end
 

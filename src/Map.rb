@@ -1,6 +1,7 @@
 require_relative 'Drawable.rb'
 require_relative 'Player.rb'
 require_relative 'EnemyGenerator.rb'
+require_relative 'Crosshair.rb'
 
 class Map < Drawable
 
@@ -22,9 +23,8 @@ class Map < Drawable
         @backgroundImage = Gosu::Image.new("assets/Rubyland.bmp")
     end
 
-    def update
-      @player.update
-
+    def update(mouse_x, mouse_y)
+      @player.update(mouse_x, mouse_y)
       @enemies.each do |enemy|
         enemy.update
       end
@@ -32,12 +32,11 @@ class Map < Drawable
 
     def draw(font)
         @backgroundImage.draw(@x, @y, @z)
-
         @enemies.each do |enemy|
           enemy.draw
         end
 
-        @player.draw
+        @player.draw    
     end
 
 end
