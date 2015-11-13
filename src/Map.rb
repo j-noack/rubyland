@@ -19,10 +19,12 @@ class Map < Drawable
         @enemyGenerator = EnemyGenerator.new(@player)
         @enemies = @enemyGenerator.generate
 
-        @backgroundImage = Gosu::Image.new("assets/boxhead.jpg")
+        @backgroundImage = Gosu::Image.new("assets/Rubyland.bmp")
     end
 
     def update
+      @player.update
+
       @enemies.each do |enemy|
         enemy.update
       end
