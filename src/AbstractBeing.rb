@@ -18,9 +18,19 @@ class AbstractBeing < Drawable
         return 5
     end
 
+    def update(focus_x, focus_y)
+      if (focus_y - self.y < 0)
+        @angle =  180 / Math::PI * Math.asin((focus_x - @x) / Math.sqrt((focus_x - @x)**2 + (focus_y - @y)**2))
+      end
+
+      if (focus_y - self.y > 0)
+        @angle = 90  + 180 / Math::PI * Math.acos(((focus_x - @x)) / Math.sqrt((focus_x - @x)** 2 + (focus_y - @y)**2))
+      end
+    end
+
     def draw(offsetX, offsetY)
       if !spriteImage.nil?
-        @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, angle = 0.0)
+        @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, @angle)
       end
     end
 end

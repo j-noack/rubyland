@@ -5,11 +5,13 @@ class Drawable
     attr_accessor :width
     attr_accessor :height
     attr_accessor :spriteImage
+    attr_accessor :angle
 
     def initialize
         @x = 0
         @y = 0
         @z = 0
+        @angle = 0.0
         @width = 0
         @height = 0
         @spriteImage = nil

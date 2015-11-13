@@ -24,7 +24,7 @@ class GameWindow < Gosu::Window
     end
 
     def update
-        @map.update
+        @map.update(mouse_x, mouse_y)
         @highscore.update
     end
 

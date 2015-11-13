@@ -13,6 +13,10 @@ class Enemy < AbstractBeing
     end
 
     def update
+      if (!@target.nil?)
+        super(@target.x, @target.y)
+      end
+
       @ai.update
     end
 

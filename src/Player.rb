@@ -6,17 +6,22 @@ class Player < AbstractBeing
 	attr_accessor :keyA
 	attr_accessor :keyS
 	attr_accessor :keyD
+	attr_accessor :angle
+	attr_accessor :crosshair
 
     def initialize
         super
 				loadSprite("assets/Player.bmp")
+				@crosshair = Crosshair.new
 				@keyW = 0
 				@keyA = 0
 				@keyS = 0
 				@keyD = 0
 		end
 
-		def	update
+		def	update(focus_x, focus_y)
+			super
+			@crosshair.update(focus_x, focus_y)
 			@keyW = Gosu::button_down?(Gosu::KbW) ? 1 : 0
 			@keyS = Gosu::button_down?(Gosu::KbS) ? 1 : 0
 	    @keyA = Gosu::button_down?(Gosu::KbA) ? 1 : 0
@@ -40,5 +45,8 @@ class Player < AbstractBeing
       @y = calcNewY
     end
 
-
+		def draw(offsetX, offsetY)
+			super
+			@crosshair.draw
+		end
 end
