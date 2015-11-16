@@ -18,6 +18,7 @@ class AbstractBeing < Drawable
         return 5
     end
 
+    #Orientation of the Being
     def update(focus_x, focus_y)
       if (focus_y - self.y < 0)
         @angle =  180 / Math::PI * Math.asin((focus_x - @x) / Math.sqrt((focus_x - @x)**2 + (focus_y - @y)**2))
