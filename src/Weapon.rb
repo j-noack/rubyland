@@ -2,29 +2,38 @@ require_relative 'Drawable.rb'
 require_relative 'Projectile.rb'
 
 class Weapon < Drawable
-	
+
 	attr_accessor :triggered
-	
-	def initialize
-        super
-		@projectileSpeed = 2
+	attr_accessor :being
+
+	def initialize(being)
+        super()
+		@being = being
+		@projectileSpeed = 5
 		@projectileDuration = 200
-		@delay = 200
+		@delay = 15
+		@cooldown = 0
 		@triggered = false
+		@damage = 1
 	end
-	
+
+ 	# TODO: @LUKAS position anpassen
 	def update(playerX, playerY, playerAngle)
 		@x = playerX
 		@y = playerY
 		@angle = playerAngle
+		if @cooldown > 0
+			@cooldown -= 1
+		end
 	end
-	
+
 	def getProjectiles
 		projectiles = []
-		if @triggered
-			projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration)
+		if @triggered && @cooldown == 0
+			projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+			@cooldown = @delay
 		end
-		
+
 		return projectiles
 	end
 end

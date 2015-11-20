@@ -18,6 +18,10 @@ class AbstractBeing < Drawable
         return 5
     end
 
+    def dead?
+        return @hp <= 0
+    end
+
     #Orientation of the Being
     def update(focus_x, focus_y)
       if (focus_y - self.y < 0)
@@ -34,17 +38,17 @@ class AbstractBeing < Drawable
         @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, @angle)
       end
     end
-	
+
 	def getProjectiles
 		projectiles = []
-		
+
 		if !@weapon.nil?
 			if @weapon.triggered
-				projectiles << @weapon.getProjectiles
+				projectiles.concat(@weapon.getProjectiles)
 			end
 		end
-		
+
 		return projectiles
 	end
-	
+
 end

@@ -8,7 +8,7 @@ class Highscore < Drawable
         super
         @score = 0
 
-        @scoreBonus = 10
+        @scoreBonus = 1
         @bonusIntervall = 60
         @intervallCount = 0
     end

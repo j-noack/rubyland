@@ -31,13 +31,13 @@ class EnemyGenerator
   def wave1
     enemies = []
 
-    mapW = @map.width
-    mapH = @map.height
+    mapW = @map.width - (@map.borderWidth * 2)
+    mapH = @map.height - (@map.borderWidth * 2)
 
-    100.times do |i|
+    50.times do |i|
       enemy = Enemy.new
-      enemy.x = rand(mapW)
-      enemy.y = rand(mapH)
+      enemy.x = enemy.width + @map.borderWidth + rand(mapW - enemy.width * 2)
+      enemy.y = enemy.width + @map.borderWidth + rand(mapH - enemy.width * 2)
       enemy.target = @target
       enemy.speed = rand(150) * 0.01 + 0.1
 
