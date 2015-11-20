@@ -34,4 +34,17 @@ class AbstractBeing < Drawable
         @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, @angle)
       end
     end
+	
+	def getProjectiles
+		projectiles = []
+		
+		if !@weapon.nil?
+			if @weapon.triggered
+				projectiles << @weapon.getProjectiles
+			end
+		end
+		
+		return projectiles
+	end
+	
 end
