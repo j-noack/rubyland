@@ -1,14 +1,12 @@
 require 'gosu'
 require_relative 'src/Highscore.rb'
 require_relative 'src/Map.rb'
-require_relative 'src/CollisionManager.rb'
 
 class GameWindow < Gosu::Window
     @@VERSION = "0.1 ALPHA"
 
     attr_accessor :map
     attr_accessor :highscore
-    attr_accessor :collisionManager
 
     def initialize
         super(1024, 768)
@@ -19,13 +17,15 @@ class GameWindow < Gosu::Window
         @highscore = Highscore.new
 
         mapOffsetY = 32
-        @map = Map.new(1024, 768 - mapOffsetY, 8)
+        @map = Map.new(1024, 768 - mapOffsetY, 8, @highscore)
         @map.y = mapOffsetY
     end
 
     def update
-        @map.update(mouse_x, mouse_y)
-        @highscore.update
+        if (@map.stillAlive)
+            @map.update(mouse_x, mouse_y)
+            @highscore.update
+        end
     end
 
     def draw

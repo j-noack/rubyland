@@ -1,4 +1,5 @@
 require_relative 'AbstractBeing.rb'
+require_relative 'Weapon.rb'
 
 class Player < AbstractBeing
 
@@ -17,7 +18,8 @@ class Player < AbstractBeing
 		@keyA = 0
 		@keyS = 0
 		@keyD = 0
-		@weapon = Weapon.new
+		@weapon = Weapon.new(self)
+		@hp = 60
 	end
 
 	def	update(focus_x, focus_y, offsetX, offsetY)
@@ -29,7 +31,7 @@ class Player < AbstractBeing
 		@keyS = Gosu::button_down?(Gosu::KbS) ? 1 : 0
 		@keyA = Gosu::button_down?(Gosu::KbA) ? 1 : 0
 		@keyD = Gosu::button_down?(Gosu::KbD) ? 1 : 0
-		
+
 		if (!@weapon.nil?)
 			@weapon.update(@x, @y, @angle)
 			@weapon.triggered = Gosu::button_down? (Gosu::MsLeft)

@@ -2,68 +2,98 @@ require_relative 'Drawable.rb'
 require_relative 'Player.rb'
 require_relative 'EnemyGenerator.rb'
 require_relative 'Crosshair.rb'
+require_relative 'CollisionManager.rb'
 
 class Map < Drawable
-
     attr_accessor :player
     attr_accessor :enemies
     attr_accessor :borderWidth
-	attr_accessor :projectiles
+    attr_accessor :projectiles
+    attr_accessor :stillAlive
 
-    def initialize(width, height, borderWidth)
+    def initialize(width, height, borderWidth, highscore)
         super()
 
+        @stillAlive = true
         @width = width
         @height = height
         @borderWidth = borderWidth
+        @highscore = highscore
         @player = Player.new
         @player.x = width / 2
         @player.y = height / 2
 
         @enemyGenerator = EnemyGenerator.new(self, @player)
         @enemies = @enemyGenerator.generate
-		@projectiles = []
-		
+        @projectiles = []
+
         @collisionManager = CollisionManager.new(self)
-        @backgroundImage = Gosu::Image.new("assets/Rubyland.bmp")
+        @backgroundImage = Gosu::Image.new('assets/Rubyland.bmp')
     end
-	
-	def getProjectiles(being)
-		projectiles = being.getProjectiles
-		if (!projectiles.empty?)
-			@projectiles << projectiles
-		end
-	end
-	
+
+    def getProjectiles(being)
+        projectiles = being.getProjectiles
+        @projectiles.concat(projectiles)
+    end
+
     def update(mouse_x, mouse_y)
-		@player.update(mouse_x, mouse_y, self.x, self.y)
-		getProjectiles(@player)
-		
-		if @collisionManager.canPlayerMove?
-			@player.move
-		end
-		
-		@enemies.each do |enemy|
-			enemy.update
-			getProjectiles(enemy)
-		end
-		
-		@projectiles.each do |projectile|
-			# collisionmanager
-		end
+        @player.update(mouse_x, mouse_y, x, y)
+        getProjectiles(@player)
+
+        @player.move if @collisionManager.canPlayerMove?
+
+        @enemies.each do |enemy|
+            enemy.update
+            enemy.move if @collisionManager.canEnemyMove?(enemy)
+            getProjectiles(enemy)
+        end
+
+        @projectiles.each do |projectile|
+            projectile.update
+            @collisionManager.checkProjectileCollisionsWithBeing(projectile)
+
+            if @collisionManager.canProjectileFly?(projectile)
+                projectile.fly
+            else
+                projectile.duration = 0
+            end
+        end
+
+        @projectiles.delete_if do |projectile|
+            projectile.duration <= 0
+        end
+
+
+        # Highscore and dead enemies
+        dead_enemies = @enemies.select do |enemy|
+            enemy.dead?
+        end
+
+        dead_enemies.each do |enemy|
+            @highscore.score += enemy.score
+            @enemies.delete(enemy)
+        end
+
+        if @player.dead?
+            @stillAlive = false
+        end
     end
-	
+
     def draw(font)
         @backgroundImage.draw(@x, @y, @z)
         @enemies.each do |enemy|
-          enemy.draw(self.x, self.y)
+            enemy.draw(x, y)
         end
 
-        @player.draw(self.x, self.y)
-		
-		@projectiles.each do |projectile|
-			projectiles.draw
-		end
-    end
+        @player.draw(x, y)
 
+        @projectiles.each do |projectile|
+            projectile.draw(x, y)
+        end
+
+        if !@stillAlive
+            width = font.text_width("GAME OVER")
+            font.draw("GAME OVER", (@width / 2) - (width / 2), @height / 2, 999)
+        end
+    end
 end
