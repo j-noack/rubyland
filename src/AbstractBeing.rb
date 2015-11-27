@@ -44,7 +44,7 @@ class AbstractBeing < Drawable
     end
 
     def draw(offsetX, offsetY)
-		@spriteImages[(@angle / 45).to_i].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
+		@spriteImages[(@angle / 60).to_i].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
     end
 
     def getProjectiles

@@ -11,7 +11,7 @@ class Player < AbstractBeing
 
     def initialize
         super
-        loadSprite('assets/Player.bmp')
+        loadSprite('assets/PlayerSpriteSheet.bmp')
         @crosshair = Crosshair.new
         @keyW = 0
         @keyA = 0
@@ -19,7 +19,7 @@ class Player < AbstractBeing
         @keyD = 0
         @weapon = Weapon.new(self)
         @hp = 60
-     end
+    end
 
     def	update(focus_x, focus_y, offsetX, offsetY)
         focus_y -= offsetY
