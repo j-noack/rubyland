@@ -5,19 +5,21 @@ require_relative 'src/Map.rb'
 
 class GameWindow < Gosu::Window
     @@VERSION = '0.1 ALPHA'
+    @@SCREEN_WIDTH = 1024
+    @@SCREEN_HEIGHT = 768
 
     attr_accessor :map
     attr_accessor :highscore
 
     def initialize
-        super(1024, 768)
+        super(@@SCREEN_WIDTH, @@SCREEN_HEIGHT)
         self.caption = "Rubyland #{@@VERSION}"
 
         @font = Gosu::Font.new(25, name: 'assets/Amble-Regular.ttf')
 
         @highscore = Highscore.new
         mapOffsetY = 32
-        @map = Map.new(1024, 768 - mapOffsetY, 8, @highscore)
+        @map = Map.new(@@SCREEN_WIDTH, @@SCREEN_HEIGHT - mapOffsetY, 8, @highscore)
         @map.y = mapOffsetY
 
         @lifeBar = Lifebar.new(@map.player)

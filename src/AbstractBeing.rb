@@ -16,7 +16,7 @@ class AbstractBeing < Drawable
 		@tileWidth = 41
 		@tileHeight = 41
 		@spriteImages = []
-        self.maxhp = 60
+        self.maxhp = 600
     end
 
     def maxhp=(value)
