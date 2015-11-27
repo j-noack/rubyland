@@ -24,6 +24,8 @@ class AbstractBeing < Drawable
 	#
 	def loadSprite(sprite)
 		@spriteImages = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
+		@width = 25
+		@height = 25
 	end
 
     def damage
@@ -48,7 +50,7 @@ class AbstractBeing < Drawable
     end
 
     def draw(offsetX, offsetY)
-		@spriteImages[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
+		@spriteImages[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
     end
 
     def getProjectiles
