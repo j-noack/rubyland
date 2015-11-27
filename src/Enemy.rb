@@ -2,7 +2,6 @@ require_relative 'AbstractBeing.rb'
 require_relative 'EnemyAI.rb'
 
 class Enemy < AbstractBeing
-
     attr_accessor :target
     attr_accessor :score
     attr_accessor :damage
@@ -13,23 +12,22 @@ class Enemy < AbstractBeing
         @ai = EnemyAI.new(self)
         @score = 5
         @damage = 1
-        loadSprite("assets/Enemy.bmp")
+        loadSprite('assets/PlayerSpriteSheet.bmp')
+        self.maxhp = 1
     end
 
     def update
-      if (!@target.nil?)
-        super(@target.x, @target.y)
-      end
+        super(@target.x, @target.y) unless @target.nil?
 
-      @ai.update
+        @ai.update
     end
 
     def calcNewX
-        return @ai.calcNewX
+        @ai.calcNewX
     end
 
     def calcNewY
-        return @ai.calcNewY
+        @ai.calcNewY
     end
 
     def move

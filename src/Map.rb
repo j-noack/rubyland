@@ -63,20 +63,15 @@ class Map < Drawable
             projectile.duration <= 0
         end
 
-
         # Highscore and dead enemies
-        dead_enemies = @enemies.select do |enemy|
-            enemy.dead?
-        end
+        dead_enemies = @enemies.select(&:dead?)
 
         dead_enemies.each do |enemy|
             @highscore.score += enemy.score
             @enemies.delete(enemy)
         end
 
-        if @player.dead?
-            @stillAlive = false
-        end
+        @stillAlive = false if @player.dead?
     end
 
     def draw(font)
@@ -91,9 +86,9 @@ class Map < Drawable
             projectile.draw(x, y)
         end
 
-        if !@stillAlive
-            width = font.text_width("GAME OVER")
-            font.draw("GAME OVER", (@width / 2) - (width / 2), @height / 2, 999)
+        unless @stillAlive
+            width = font.text_width('GAME OVER')
+            font.draw('GAME OVER', (@width / 2) - (width / 2), @height / 2, 999)
         end
     end
 end
