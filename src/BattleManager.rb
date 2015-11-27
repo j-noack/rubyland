@@ -6,6 +6,5 @@ class BattleManager
 
     def doPlayerCollisionWithEnemy(player, enemy)
         player.hp -= enemy.damage
-        puts 'lala'
     end
 end
