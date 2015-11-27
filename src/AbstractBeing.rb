@@ -1,9 +1,9 @@
 require_relative 'Drawable.rb'
 
 class AbstractBeing < Drawable
-    attr_accessor :speed
-    attr_accessor :maxhp
+    attr_reader   :maxhp
     attr_accessor :hp
+    attr_accessor :speed
     attr_accessor :weapon
 	attr_accessor :tileWidth
 	attr_accessor :tileHeigth
@@ -12,18 +12,23 @@ class AbstractBeing < Drawable
         super
         @z = 5
         @speed = 2
-        @maxhp = 1
-        @hp = @maxhp
         @weapon = nil
 		@tileWidth = 41
 		@tileHeight = 41
 		@spriteImages = []
+        self.maxhp = 60
     end
 
+    def maxhp=(value)
+        @maxhp = value
+        @hp = @maxhp
+    end
 	#
 	#
 	def loadSprite(sprite)
 		@spriteImages = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
+        @width = 41
+        @height = 41
 	end
 
     def damage

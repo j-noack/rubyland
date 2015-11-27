@@ -12,7 +12,8 @@ class Enemy < AbstractBeing
         @ai = EnemyAI.new(self)
         @score = 5
         @damage = 1
-        loadSprite('assets/Enemy.bmp')
+        loadSprite('assets/PlayerSpriteSheet.bmp')
+        self.maxhp = 1
     end
 
     def update

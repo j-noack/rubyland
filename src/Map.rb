@@ -77,7 +77,7 @@ class Map < Drawable
     def draw(font)
         @backgroundImage.draw(@x, @y, @z)
         @enemies.each do |enemy|
-            #enemy.draw(x, y)
+            enemy.draw(x, y)
         end
 
         @player.draw(x, y)

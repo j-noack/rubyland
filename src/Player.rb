@@ -18,8 +18,8 @@ class Player < AbstractBeing
         @keyS = 0
         @keyD = 0
         @weapon = Weapon.new(self)
-        @hp = 60
     end
+
 
     def	update(focus_x, focus_y, offsetX, offsetY)
         focus_y -= offsetY
