@@ -2,6 +2,7 @@ require_relative 'Drawable.rb'
 
 class AbstractBeing < Drawable
     attr_accessor :speed
+    attr_accessor :maxhp
     attr_accessor :hp
     attr_accessor :weapon
 	attr_accessor :tileWidth
@@ -11,7 +12,8 @@ class AbstractBeing < Drawable
         super
         @z = 5
         @speed = 2
-        @hp = 1
+        @maxhp = 1
+        @hp = @maxhp
         @weapon = nil
 		@tileWidth = 41
 		@tileHeight = 41
@@ -41,10 +43,12 @@ class AbstractBeing < Drawable
         if focus_y - y > 0
             @angle = 90 + 180 / Math::PI * Math.acos(((focus_x - @x)) / Math.sqrt((focus_x - @x)**2 + (focus_y - @y)**2))
         end
+
+        @angle += 360 if @angle < 0
     end
 
     def draw(offsetX, offsetY)
-		@spriteImages[(@angle / 60).to_i].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
+		@spriteImages[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
     end
 
     def getProjectiles
