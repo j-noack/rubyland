@@ -1,9 +1,0 @@
-diff a/main.rb b/main.rb	(rejected hunks)
-@@ -19,7 +19,6 @@
-         @map = Map.new(640, 480 - @highscore.height)
-         @map.y = @highscore.height
- 
--        @collisionManager = CollisionManager.new
-         @collisionManager = CollisionManager.new(@map)
- 
-     end
