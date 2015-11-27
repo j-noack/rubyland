@@ -9,12 +9,10 @@ class Map < Drawable
     attr_accessor :enemies
     attr_accessor :borderWidth
     attr_accessor :projectiles
-    attr_accessor :stillAlive
 
     def initialize(width, height, borderWidth, highscore)
         super()
 
-        @stillAlive = true
         @width = width
         @height = height
         @borderWidth = borderWidth
@@ -24,7 +22,7 @@ class Map < Drawable
         @player.y = height / 2
 
         @enemyGenerator = EnemyGenerator.new(self, @player)
-        @enemies = @enemyGenerator.generate
+        @enemies = []
         @projectiles = []
 
         @collisionManager = CollisionManager.new(self)
@@ -71,7 +69,10 @@ class Map < Drawable
             @enemies.delete(enemy)
         end
 
-        @stillAlive = false if @player.dead?
+        if @enemies.empty?
+            @highscore.score += @enemyGenerator.waveCount * 20
+            @enemies.concat(@enemyGenerator.nextWave)
+        end
     end
 
     def draw(font)
@@ -86,9 +87,13 @@ class Map < Drawable
             projectile.draw(x, y)
         end
 
-        unless @stillAlive
+        if @player.dead?
             width = font.text_width('GAME OVER')
             font.draw('GAME OVER', (@width / 2) - (width / 2), @height / 2, 999)
         end
+    end
+
+    def waveCount
+        return @enemyGenerator.waveCount
     end
 end

@@ -5,7 +5,7 @@ class Lifebar < Drawable
     def initialize(player)
         super()
         @player = player
-        @x = 150
+        @x = 400
         @y = 9
         @width = 100
         @height = 15

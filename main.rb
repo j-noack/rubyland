@@ -8,9 +8,6 @@ class GameWindow < Gosu::Window
     @@SCREEN_WIDTH = 1024
     @@SCREEN_HEIGHT = 768
 
-    attr_accessor :map
-    attr_accessor :highscore
-
     def initialize
         super(@@SCREEN_WIDTH, @@SCREEN_HEIGHT)
         self.caption = "Rubyland #{@@VERSION}"
@@ -26,7 +23,7 @@ class GameWindow < Gosu::Window
     end
 
     def update
-        if @map.stillAlive
+        if !@map.player.dead?
             @map.update(mouse_x, mouse_y)
             @highscore.update
             @lifeBar.update
@@ -37,6 +34,7 @@ class GameWindow < Gosu::Window
         @map.draw(@font)
         @highscore.draw(@font)
         @lifeBar.draw(@font)
+        @font.draw("Wave: #{@map.waveCount}", @lifeBar.x + @lifeBar.width + 50, 4, 9)
         @font.draw("Fps: #{Gosu.fps.to_i}", 1024 - 75, 4, 999)
     end
 

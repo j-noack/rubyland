@@ -6,18 +6,9 @@ class Highscore < Drawable
     def initialize
         super
         @score = 0
-
-        @scoreBonus = 1
-        @bonusIntervall = 60
-        @intervallCount = 0
     end
 
     def update
-        @intervallCount += 1
-        if @bonusIntervall == @intervallCount
-            @intervallCount = 0
-            @score += @scoreBonus
-        end
     end
 
     def draw(font)
