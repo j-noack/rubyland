@@ -4,6 +4,8 @@ class AbstractBeing < Drawable
     attr_accessor :speed
     attr_accessor :hp
     attr_accessor :weapon
+	attr_accessor :tileWidth
+	attr_accessor :tileHeigth
 
     def initialize
         super
@@ -11,7 +13,16 @@ class AbstractBeing < Drawable
         @speed = 2
         @hp = 1
         @weapon = nil
+		@tileWidth = 41
+		@tileHeight = 41
+		@spriteImages = []
     end
+
+	#
+	#
+	def loadSprite(sprite)
+		@spriteImages = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
+	end
 
     def damage
         5
@@ -33,9 +44,7 @@ class AbstractBeing < Drawable
     end
 
     def draw(offsetX, offsetY)
-        unless spriteImage.nil?
-            @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, @angle)
-        end
+		@spriteImages[(@angle / 45).to_i].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
     end
 
     def getProjectiles
