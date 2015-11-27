@@ -3,7 +3,7 @@ require_relative 'src/Highscore.rb'
 require_relative 'src/Map.rb'
 
 class GameWindow < Gosu::Window
-    @@VERSION = "0.1 ALPHA"
+    @@VERSION = '0.1 ALPHA'
 
     attr_accessor :map
     attr_accessor :highscore
@@ -12,7 +12,7 @@ class GameWindow < Gosu::Window
         super(1024, 768)
         self.caption = "Rubyland #{@@VERSION}"
 
-        @font = Gosu::Font.new(25, { :name => "assets/Amble-Regular.ttf" })
+        @font = Gosu::Font.new(25, name: 'assets/Amble-Regular.ttf')
 
         @highscore = Highscore.new
 
@@ -22,7 +22,7 @@ class GameWindow < Gosu::Window
     end
 
     def update
-        if (@map.stillAlive)
+        if @map.stillAlive
             @map.update(mouse_x, mouse_y)
             @highscore.update
         end
@@ -31,15 +31,12 @@ class GameWindow < Gosu::Window
     def draw
         @highscore.draw(@font)
         @map.draw(@font)
-        @font.draw("Fps: #{Gosu::fps.to_i}", 1024 - 75, 4 ,999)
+        @font.draw("Fps: #{Gosu.fps.to_i}", 1024 - 75, 4, 999)
     end
 
     def button_down(id)
-      if id == Gosu::KbEscape
-        close
-      end
+        close if id == Gosu::KbEscape
     end
-
 end
 
 window = GameWindow.new

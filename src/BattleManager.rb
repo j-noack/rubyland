@@ -1,5 +1,4 @@
 class BattleManager
-
     def doProjectileCollisionWithBeing(being, projectile)
         being.hp -= projectile.damage
         projectile.duration = 0
@@ -7,6 +6,6 @@ class BattleManager
 
     def doPlayerCollisionWithEnemy(player, enemy)
         player.hp -= enemy.damage
-        puts "lala"
+        puts 'lala'
     end
 end

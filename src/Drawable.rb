@@ -21,9 +21,8 @@ class Drawable
     end
 
     def loadSprite(sprite)
-      @spriteImage = Gosu::Image.new(sprite)
-      @width = @spriteImage.width
-      @height = @spriteImage.height
+        @spriteImage = Gosu::Image.new(sprite)
+        @width = @spriteImage.width
+        @height = @spriteImage.height
     end
-
 end
