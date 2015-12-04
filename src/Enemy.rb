@@ -35,3 +35,11 @@ class Enemy < AbstractBeing
         @y = calcNewY
     end
 end
+
+class CirclerEnemy < Enemy
+
+	def initialize
+		super
+		@ai = CirclerAI.new(self)
+	end
+end
