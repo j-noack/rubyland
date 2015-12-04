@@ -1,5 +1,9 @@
 require_relative 'AbstractBeing.rb'
 require_relative 'Weapon.rb'
+require_relative 'Weapons/Pistol.rb'
+require_relative 'Weapons/Shotgun.rb'
+require_relative 'Weapons/Sniperrifle.rb'
+require_relative 'Weapons/SMG.rb'
 
 class Player < AbstractBeing
     attr_accessor :keyW
@@ -17,7 +21,8 @@ class Player < AbstractBeing
         @keyA = 0
         @keyS = 0
         @keyD = 0
-        @weapon = Weapon.new(self)
+    #    @weapon = Weapon.new(self)
+        @weapon = SMG.new(self)
     end
 
 
@@ -34,6 +39,7 @@ class Player < AbstractBeing
         unless @weapon.nil?
             @weapon.update(@x, @y, @angle)
             @weapon.triggered = Gosu.button_down? (Gosu::MsLeft)
+            @weapon.triggered = Gosu.button_down? (Gosu::KbSpace)
         end
     end
 

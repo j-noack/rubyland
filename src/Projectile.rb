@@ -4,6 +4,7 @@ class Projectile < Drawable
     attr_accessor :duration
     attr_accessor :damage
     attr_accessor :source
+    attr_accessor :pierce
 
     def initialize(startX, startY, angle, speed, duration, damage, source)
         super()
@@ -14,6 +15,7 @@ class Projectile < Drawable
         @duration = duration
         @damage = damage
         @source = source
+        @pierce = false
         loadSprite('assets/Bullet.bmp')
     end
 
