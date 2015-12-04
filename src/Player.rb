@@ -25,7 +25,6 @@ class Player < AbstractBeing
         @weapon = SMG.new(self)
     end
 
-
     def	update(focus_x, focus_y, offsetX, offsetY)
         focus_y -= offsetY
         focus_x -= offsetX

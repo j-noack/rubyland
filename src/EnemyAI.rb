@@ -12,10 +12,41 @@ class EnemyAI
     end
 
     def calcNewX
-        @enemy.x + (@enemy.target.x - @enemy.x) * @ratio
+		@enemy.x + (@enemy.target.x - @enemy.x) * @ratio
     end
 
     def calcNewY
-        @enemy.y + (@enemy.target.y - @enemy.y) * @ratio
+		@enemy.y + (@enemy.target.y - @enemy.y) * @ratio
     end
+end
+
+class CirclerAI < EnemyAI
+
+	attr_accessor :neg
+	attr_accessor :moveAngle
+
+	def initialize
+		super
+		if (rand(2))
+			neg = -1
+		else
+			neg = 1
+		end
+	end
+	
+	def update
+		super
+		if distance > 450
+			@moveAngle = (@enemy.angle + (75 * neg) + 360) % 360
+		else
+			@moveAngle = (@enemy.angle + ((distance / 6) * neg) + 360) % 360
+		end
+	
+	def calcNewX
+		@enemy.x + ((@enemy.target.x - @enemy.x) * @ratio) + (Math.sin(@moveAngle) * @speed)
+	end
+	
+	def calcNewY
+		@enemy.y + ((@enemy.target.y - @enemy.y) * @ratio) + (Math.cos(@moveAngle) * @speed)
+	end
 end
