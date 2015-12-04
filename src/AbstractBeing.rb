@@ -1,35 +1,38 @@
 require_relative 'Drawable.rb'
 
 class AbstractBeing < Drawable
-    attr_reader   :maxhp
+    attr_reader :maxhp
     attr_accessor :hp
     attr_accessor :speed
     attr_accessor :weapon
-	attr_accessor :tileWidth
-	attr_accessor :tileHeigth
+    attr_accessor :tileWidth
+    attr_accessor :tileHeigth
 
     def initialize
         super
         @z = 5
         @speed = 2
         @weapon = nil
-		@tileWidth = 41
-		@tileHeight = 41
-		@spriteImages = []
+        @tileWidth = 41
+        @tileHeight = 41
+        @spriteImages = []
         self.maxhp = 600
     end
 
     def maxhp=(value)
         @maxhp = value
+        resetHp
+    end
+
+    def resetHp
         @hp = @maxhp
     end
-	#
-	#
-	def loadSprite(sprite)
-		@spriteImages = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
+
+    def loadSprite(sprite)
+        @spriteImages = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
         @width = 25
         @height = 25
-	end
+    end
 
     def damage
         5
@@ -53,7 +56,7 @@ class AbstractBeing < Drawable
     end
 
     def draw(offsetX, offsetY)
-		@spriteImages[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
+        @spriteImages[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
     end
 
     def getProjectiles

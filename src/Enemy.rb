@@ -5,6 +5,7 @@ class Enemy < AbstractBeing
     attr_accessor :target
     attr_accessor :score
     attr_accessor :damage
+    attr_accessor :enabled
 
     def initialize
         super
@@ -12,6 +13,7 @@ class Enemy < AbstractBeing
         @ai = EnemyAI.new(self)
         @score = 5
         @damage = 1
+        @enabled = false
         loadSprite('assets/PlayerSpriteSheet.bmp')
         self.maxhp = 1
     end

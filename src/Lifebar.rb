@@ -1,7 +1,6 @@
 require_relative 'Drawable.rb'
 
 class Lifebar < Drawable
-
     def initialize(player)
         super()
         @player = player
@@ -23,13 +22,12 @@ class Lifebar < Drawable
 
     def draw(font)
         if @player.dead?
-            font.draw("DEAD", @x + 40, @y - 4, 9, 1, 1, Gosu::Color::RED)
+            font.draw('DEAD', @x + 40, @y - 4, 9, 1, 1, Gosu::Color::RED)
         else
-            font.draw("HP: ", @x, @y - 4, 9, 1, 1, Gosu::Color::WHITE)
-            Gosu::draw_rect(@x + 35, @y + 1, @width, @height, Gosu::Color::BLACK)
-            Gosu::draw_rect(@x + 36, @y + 2, @width - 2, @height - 2, Gosu::Color::GRAY)
-            Gosu::draw_rect(@x + 36, @y + 2, @progessWidth, @height - 2, Gosu::Color::GREEN)
+            font.draw('HP: ', @x, @y - 4, 9, 1, 1, Gosu::Color::WHITE)
+            Gosu.draw_rect(@x + 35, @y + 1, @width, @height, Gosu::Color::BLACK)
+            Gosu.draw_rect(@x + 36, @y + 2, @width - 2, @height - 2, Gosu::Color::GRAY)
+            Gosu.draw_rect(@x + 36, @y + 2, @progessWidth, @height - 2, Gosu::Color::GREEN)
         end
-
     end
 end

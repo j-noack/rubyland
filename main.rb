@@ -23,7 +23,7 @@ class GameWindow < Gosu::Window
     end
 
     def update
-        if !@map.player.dead?
+        unless @map.player.dead?
             @map.update(mouse_x, mouse_y)
             @highscore.update
             @lifeBar.update
@@ -34,6 +34,7 @@ class GameWindow < Gosu::Window
         @map.draw(@font)
         @highscore.draw(@font)
         @lifeBar.draw(@font)
+        @font.draw("Spawned: #{@map.enemyGenerator.count}", 1024 - 250, 4, 999)
         @font.draw("Wave: #{@map.waveCount}", @lifeBar.x + @lifeBar.width + 50, 4, 9)
         @font.draw("Fps: #{Gosu.fps.to_i}", 1024 - 75, 4, 999)
     end

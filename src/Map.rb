@@ -9,6 +9,7 @@ class Map < Drawable
     attr_accessor :enemies
     attr_accessor :borderWidth
     attr_accessor :projectiles
+    attr_accessor :enemyGenerator
 
     def initialize(width, height, borderWidth, highscore)
         super()
@@ -73,6 +74,10 @@ class Map < Drawable
             @highscore.score += @enemyGenerator.waveCount * 20
             @enemies.concat(@enemyGenerator.nextWave)
         end
+
+        if Gosu.button_down?(Gosu::KbSpace)
+            @enemies.each { |enemy| enemy.hp = 0 }
+        end
     end
 
     def draw(font)
@@ -94,6 +99,6 @@ class Map < Drawable
     end
 
     def waveCount
-        return @enemyGenerator.waveCount
+        @enemyGenerator.waveCount
     end
 end
