@@ -18,7 +18,7 @@ class EnemyGenerator
         @spriteSize = (0.5 * (26)) + puffer
 
         # Pre-spawn 1000 enemies
-        spawn(Enemy, 1000)
+        spawn(CirclerEnemy, 1000)
     end
 
     def count
@@ -30,7 +30,7 @@ class EnemyGenerator
         waveN(@waveCount)
     end
 
-    def waveccN(n)
+    def waveddN(n)
         spawn(CirclerEnemy, 1)
         @@ENEMIES.each do |e|
             randomize(e)
@@ -44,7 +44,7 @@ class EnemyGenerator
 
         if diff > 0
             puts "Allocating #{diff} new enemies."
-            spawn(Enemy, diff)
+            spawn(CirclerEnemy, diff)
         end
 
         nextEnemiesCount.times do |i|

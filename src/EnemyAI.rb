@@ -25,7 +25,7 @@ class CirclerAI < EnemyAI
 
 	def initialize(being)
 		super
-		@neg = 1#rand(2) == 0 ? -1 : 1
+		@neg = rand(2) == 0 ? -1 : 1
         @moveAngle = 0
 	end
 
@@ -39,10 +39,10 @@ class CirclerAI < EnemyAI
     end
 
 	def calcNewX
-		@enemy.x + (Math.cos(@moveAngle / (180 / Math::PI)) * @enemy.speed)
+		    @enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @enemy.speed)
 	end
 
 	def calcNewY
-		@enemy.y - (Math.sin(@moveAngle / (180 / Math::PI)) * @enemy.speed)
+		    @enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @enemy.speed)
 	end
 end
