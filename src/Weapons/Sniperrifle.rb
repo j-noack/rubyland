@@ -1,6 +1,6 @@
 require_relative '../Weapon.rb'
 
-class Snippy < Weapon
+class Sniperrifle < Weapon
 
     def initialize(being)
         super
@@ -10,11 +10,12 @@ class Snippy < Weapon
         @damage = 100
     end
 
-    def getProjectiles#(@x, @y, @angle,@being)
+    def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
             projectile = Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
             projectile.pierce = true
+            projectile.durability = 100
             projectiles << projectile
             @cooldown = @delay
         end
