@@ -14,7 +14,7 @@ class Enemy < AbstractBeing
         @score = 5
         @damage = 1
         @enabled = false
-        loadSprite('assets/PlayerSpriteSheet.bmp')
+        loadSprite('assets/EnemySpriteSheet.bmp')
         self.maxhp = 1
     end
 

@@ -5,7 +5,7 @@ require_relative 'src/Map.rb'
 
 class GameWindow < Gosu::Window
     @@VERSION = '0.1 ALPHA'
-    @@SCREEN_WIDTH = 1024
+    @@SCREEN_WIDTH = 1366
     @@SCREEN_HEIGHT = 768
 
     def initialize
