@@ -59,7 +59,7 @@ class Map < Drawable
         end
 
         @projectiles.delete_if do |projectile|
-            projectile.duration <= 0
+            projectile.duration <= 0 || projectile.durability <= 0
         end
 
         # Highscore and dead enemies
@@ -75,7 +75,7 @@ class Map < Drawable
             @enemies.concat(@enemyGenerator.nextWave)
         end
 
-        if Gosu.button_down?(Gosu::KbSpace)
+        if Gosu.button_down?(Gosu::KbDelete)
             @enemies.each { |enemy| enemy.hp = 0 }
         end
     end

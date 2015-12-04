@@ -22,7 +22,7 @@ class Player < AbstractBeing
         @keyS = 0
         @keyD = 0
     #    @weapon = Weapon.new(self)
-        @weapon = SMG.new(self)
+        @weapon = Shotty.new(self)
     end
 
     def	update(focus_x, focus_y, offsetX, offsetY)
@@ -37,8 +37,7 @@ class Player < AbstractBeing
 
         unless @weapon.nil?
             @weapon.update(@x, @y, @angle)
-            @weapon.triggered = Gosu.button_down? (Gosu::MsLeft)
-            @weapon.triggered = Gosu.button_down? (Gosu::KbSpace)
+            @weapon.triggered = Gosu.button_down?(Gosu::MsLeft) || Gosu.button_down?(Gosu::KbSpace)
         end
     end
 

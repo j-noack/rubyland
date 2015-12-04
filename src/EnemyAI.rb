@@ -32,11 +32,10 @@ class CirclerAI < EnemyAI
 	def update
 		super
 		if @distance > 450
-			@moveAngle = (@enemy.angle + (75 * @neg) + 360) % 360
+			@moveAngle = @enemy.angle
 		else
 			@moveAngle = (@enemy.angle + ((@distance / 6) * @neg) + 360) % 360
 		end
-        puts @enemy.angle
     end
 
 	def calcNewX
@@ -44,6 +43,6 @@ class CirclerAI < EnemyAI
 	end
 
 	def calcNewY
-		@enemy.y + (Math.sin(@moveAngle / (180 / Math::PI)) * @enemy.speed)
+		@enemy.y - (Math.sin(@moveAngle / (180 / Math::PI)) * @enemy.speed)
 	end
 end

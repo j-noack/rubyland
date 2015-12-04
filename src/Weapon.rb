@@ -4,7 +4,6 @@ require_relative 'Projectile.rb'
 class Weapon < Drawable
     attr_accessor :triggered
     attr_accessor :being
-    #attr_accessor :weapontype
 
     def initialize(being)
         super()
@@ -15,7 +14,6 @@ class Weapon < Drawable
         @cooldown = 0
         @triggered = false
         @damage = 1
-        @weapontype = 0 #0=Pistol, 1=Snippy, 2=Shotty, 3=SMG
     end
 
     # TODO: Waffe and gemalte position anpassen
@@ -29,7 +27,7 @@ class Weapon < Drawable
     def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
-            #projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
             @cooldown = @delay
         end
         projectiles

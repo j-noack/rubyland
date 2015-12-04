@@ -1,9 +1,11 @@
 class BattleManager
     def doProjectileCollisionWithBeing(being, projectile)
         being.hp -= projectile.damage
-        projectile.duration -= 50
+
         unless projectile.pierce
-            projectile.duration = 0
+            projectile.durability = 0
+        else
+            projectile.durability -= 1
         end
     end
 
