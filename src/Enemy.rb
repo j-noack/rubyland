@@ -32,8 +32,11 @@ class Enemy < AbstractBeing
         @ai.calcNewY
     end
 
-    def move
+    def moveX
         @x = calcNewX
+    end
+
+    def moveY
         @y = calcNewY
     end
 end
