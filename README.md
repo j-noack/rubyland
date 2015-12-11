@@ -5,7 +5,16 @@
 
 ## Installation
 
-## Play
+#### Requirements
+
+* [Ruby](https://www.ruby-lang.org/de/) (minimum supported version 2.2)
+* [gosu] (https://libgosu.org/) (minimum supported version 0.10.4)
+
+#### Grab source
+`git clone https://github.com/j-noack/rubyland.git`
+
+#### Run
+`cd rubyland.git && ruby main.rb`
 
 ## Credits
 
