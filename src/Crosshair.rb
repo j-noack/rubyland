@@ -13,6 +13,6 @@ class Crosshair < Drawable
     end
 
     def draw(offsetX, offsetY)
-        @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
+        @spriteImage.draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
     end
 end
