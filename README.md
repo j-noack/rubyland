@@ -1,6 +1,6 @@
 # rubyland
 
-![Alt text](/../master/assets/ALPHA%20screenshot.png?raw=true "Optional Title")
+![Alt text](/../master/assets/BETA%20screenshot.png?raw=true "Optional Title")
 
 
 ## Installation
