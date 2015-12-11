@@ -133,11 +133,11 @@ class CollisionManager
     end
 
     def getDistanceX(obj1, obj2)
-        Math.sqrt(((obj1.calcNewX - obj2.calcNewX)**2) + ((obj1.@y - obj2.calcNewY)**2))
+        Math.sqrt(((obj1.calcNewX - obj2.calcNewX)**2) + ((obj1.y - obj2.calcNewY)**2))
     end
 
     def getDistanceY(obj1, obj2)
-        Math.sqrt(((obj1.@x	- obj2.calcNewX)**2) + ((obj1.calcNewY - obj2.calcNewY)**2))
+        Math.sqrt(((obj1.x - obj2.calcNewX)**2) + ((obj1.calcNewY - obj2.calcNewY)**2))
     end
 
     def mapBorderCollision(x, y, w, h)

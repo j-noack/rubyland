@@ -6,6 +6,7 @@ class EnemyGenerator
     attr_accessor :waveCount
 
     @@ENEMIES = []
+    @@ENEMY_TYPES = [Enemy, CirclerEnemy]
 
     def initialize(map, target)
         @map = map
@@ -17,8 +18,14 @@ class EnemyGenerator
         puffer = 4
         @spriteSize = (0.5 * (26)) + puffer
 
-        # Pre-spawn 1000 enemies
-        #spawn(CirclerEnemy, 1000)
+        preSpawn
+    end
+
+    def preSpawn
+        500.times do |i|
+            spawn(@@ENEMY_TYPES.sample, 1)
+            spawn(@@ENEMY_TYPES.sample, 1)
+        end
     end
 
     def count
@@ -40,21 +47,26 @@ class EnemyGenerator
     def waveN(n)
         enemies = []
         nextEnemiesCount = n * 5
-        diff = 0#nextEnemiesCount - @@ENEMIES.length
+        diff = nextEnemiesCount - @@ENEMIES.length
+
+        # Pre-calculate enemy types
+        nextTypes = []
+        nextEnemiesCount.times do |i|
+            nextTypes << @@ENEMY_TYPES.sample
+        end
 
         if diff > 0
             puts "Allocating #{diff} new enemies."
-            spawn(CirclerEnemy, diff)
-        end
-
-        if rand(2) == 1
-            spawn(Enemy, nextEnemiesCount)
-        else
-            spawn(CirclerEnemy, nextEnemiesCount)
+            # Spawn always random type
+            spawn(nextTypes.sample, diff)
         end
 
         nextEnemiesCount.times do |i|
-            enemy = @@ENEMIES[i]
+            enemyIndex = @@ENEMIES.find_index do |enemy|
+                enemy.is_a?(nextTypes[i]) && i >= i
+            end
+
+            enemy = @@ENEMIES[enemyIndex]
             randomize(enemy)
             enemies << enemy
         end
@@ -63,7 +75,7 @@ class EnemyGenerator
     end
 
     def spawn(enemyClass, n)
-        n.times do |_i|
+        n.times do |i|
             enemy = enemyClass.new
             @@ENEMIES << enemy
         end
@@ -74,6 +86,7 @@ class EnemyGenerator
         enemy.resetHp
         enemy.target = @target
         enemy.speed = rand(150) * 0.01 + 0.1
+        puts enemy.speed
         enemy.enabled = true
 
         randomizePosition(enemy)
