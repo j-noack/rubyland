@@ -53,8 +53,11 @@ class Player < AbstractBeing
         @y + (@keyS - @keyW) * b
     end
 
-    def move
+    def moveX
         @x = calcNewX
+    end
+
+    def moveY
         @y = calcNewY
     end
 

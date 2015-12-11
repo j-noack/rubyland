@@ -8,9 +8,9 @@ class CollisionManager
         @battleManager = BattleManager.new
     end
 
-    def canPlayerMove?
+    def canPlayerMoveX?
         player = @map.player
-        unless checkPlayerCollisionWithEnemies(player)
+        unless checkPlayerCollisionWithEnemiesX(player)
             unless mapBorderCollision(player.calcNewX, player.calcNewY, player.width, player.height)
                 return true
             end
@@ -18,8 +18,27 @@ class CollisionManager
         false
     end
 
-    def canEnemyMove?(enemy)
-        unless checkEnemyWithPlayerCollision(enemy)
+    def canPlayerMoveY?
+        player = @map.player
+        unless checkPlayerCollisionWithEnemiesY(player)
+            unless mapBorderCollision(player.calcNewX, player.calcNewY, player.width, player.height)
+                return true
+            end
+        end
+        false
+    end
+
+    def canEnemyMoveX?(enemy)
+        unless checkEnemyWithPlayerCollisionX(enemy)
+            unless mapBorderCollision(enemy.calcNewX, enemy.calcNewY, enemy.width, enemy.height)
+                return true
+            end
+        end
+        false
+    end
+
+    def canEnemyMoveY?(enemy)
+        unless checkEnemyWithPlayerCollisionY(enemy)
             unless mapBorderCollision(enemy.calcNewX, enemy.calcNewY, enemy.width, enemy.height)
                 return true
             end
@@ -31,19 +50,35 @@ class CollisionManager
         !mapBorderCollision(projectile.calcNewX, projectile.calcNewY, projectile.width, projectile.height)
     end
 
-    def checkEnemyWithPlayerCollision(enemy)
+    def checkEnemyWithPlayerCollisionX(enemy)
         player = @map.player
-        if checkCircleCollision(enemy, player)
+        if checkCircleCollisionX(enemy, player)
+            return true
+        end
+        false
+    end
+
+    def checkEnemyWithPlayerCollisionY(enemy)
+        player = @map.player
+        if checkCircleCollisionY(enemy, player)
             @battleManager.doPlayerCollisionWithEnemy(player, enemy)
             return true
         end
         false
     end
 
-    def checkPlayerCollisionWithEnemies(player)
+    def checkPlayerCollisionWithEnemiesX(player)
         enemies = @map.enemies
         enemies.each do |enemy|
-            return true if checkCircleCollision(player, enemy)
+            return true if checkCircleCollisionX(player, enemy)
+        end
+        false
+    end
+
+    def checkPlayerCollisionWithEnemiesY(player)
+        enemies = @map.enemies
+        enemies.each do |enemy|
+            return true if checkCircleCollisionY(player, enemy)
         end
         false
     end
@@ -77,8 +112,32 @@ class CollisionManager
         end
     end
 
+    def checkCircleCollisionX(obj1, obj2)
+        if getDistanceX(obj1, obj2) < (obj1.width / 2) + (obj2.width / 2)
+            return true
+        else
+            return false
+        end
+    end
+
+    def checkCircleCollisionY(obj1, obj2)
+        if getDistanceY(obj1, obj2) < (obj1.width / 2) + (obj2.width / 2)
+            return true
+        else
+            return false
+        end
+    end
+
     def getDistance(obj1, obj2)
         Math.sqrt(((obj1.calcNewX - obj2.calcNewX)**2) + ((obj1.calcNewY - obj2.calcNewY)**2))
+    end
+
+    def getDistanceX(obj1, obj2)
+        Math.sqrt(((obj1.calcNewX - obj2.calcNewX)**2) + ((obj1.@y - obj2.calcNewY)**2))
+    end
+
+    def getDistanceY(obj1, obj2)
+        Math.sqrt(((obj1.@x	- obj2.calcNewX)**2) + ((obj1.calcNewY - obj2.calcNewY)**2))
     end
 
     def mapBorderCollision(x, y, w, h)
