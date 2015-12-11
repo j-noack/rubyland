@@ -39,13 +39,17 @@ class Map < Drawable
         @player.update(mouse_x, mouse_y, x, y)
         getProjectiles(@player)
 
-        @player.moveX if @collisionManager.canPlayerMoveX?
-        @player.moveY if @collisionManager.canPlayerMoveY?
+        if @collisionManager.canPlayerMove?
+            @player.moveX if @collisionManager.canPlayerMoveBorderX?
+            @player.moveY if @collisionManager.canPlayerMoveBorderY?
+        end
 
         @enemies.each do |enemy|
             enemy.update
-            enemy.moveX if @collisionManager.canEnemyMoveX?(enemy)
-            enemy.moveY if @collisionManager.canEnemyMoveY?(enemy)
+            if @collisionManager.canEnemyMove?(enemy)
+                enemy.moveX if @collisionManager.canEnemyMoveBorderX?(enemy)
+                enemy.moveY if @collisionManager.canEnemyMoveBorderY?(enemy)
+            end
             getProjectiles(enemy)
         end
 

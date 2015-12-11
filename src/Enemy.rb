@@ -49,3 +49,11 @@ class CirclerEnemy < Enemy
         loadSprite('assets/EnemySpriteSheet2.bmp')
 	end
 end
+
+class ChargerEnemy < Enemy
+
+	def initialize
+		super
+		@ai = ChargerAI.new(self)
+	end
+end
