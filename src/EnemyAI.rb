@@ -51,12 +51,12 @@ class ChargerAI < EnemyAI
 
     def initialize(being)
 		super
-        @moveAngle = enemy.angle
+        @moveAngle = 0
     end
 
     def update
 		super
-        @moveAngle = enemy.angle
+        @moveAngle = @moveAngle + 5
     end
 
 	def calcNewX

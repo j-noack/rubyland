@@ -48,18 +48,24 @@ class EnemyGenerator
 
         if diff > 0
             # Spawn always random type
+            puts "Allocating #{diff} new enemies."
             diff.times do |i|
                 spawn(nextTypes.sample)
             end
         end
 
         nextEnemiesCount.times do |i|
-            enemy = @@ENEMIES.find do |enemy|
+            pooledEnemy = @@ENEMIES.find do |enemy|
                 enemy.is_a?(nextTypes[i]) && !enemies.include?(enemy)
             end
 
-            randomize(enemy)
-            enemies << enemy
+            if pooledEnemy.nil?
+                spawn(nextTypes[i])
+                pooledEnemy = @@ENEMIES.last
+            end
+
+            randomize(pooledEnemy)
+            enemies << pooledEnemy
         end
 
         enemies
