@@ -22,8 +22,7 @@ class EnemyGenerator
     end
 
     def preSpawn
-        250.times do |i|
-            spawn(@@ENEMY_TYPES.sample)
+        400.times do |i|
             spawn(@@ENEMY_TYPES.sample)
         end
     end
@@ -56,7 +55,7 @@ class EnemyGenerator
 
         nextEnemiesCount.times do |i|
             enemy = @@ENEMIES.find do |enemy|
-                enemy.is_a?(nextTypes[i]) && @@ENEMIES.index(enemy) >= i
+                enemy.is_a?(nextTypes[i]) && !enemies.include?(enemy)
             end
 
             randomize(enemy)
@@ -76,7 +75,6 @@ class EnemyGenerator
         enemy.resetHp
         enemy.target = @target
         enemy.speed = rand(150) * 0.01 + 0.1
-        puts enemy.speed
         enemy.enabled = true
 
         randomizePosition(enemy)
