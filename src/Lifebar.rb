@@ -13,7 +13,7 @@ class Lifebar < Drawable
 
     def update
         if @player.hp > 0
-            ratio = @player.maxhp / @player.hp
+            ratio = @player.maxhp.to_f / @player.hp
             @progessWidth = (@width - 2) / ratio
         else
             @progessWidth = 0
