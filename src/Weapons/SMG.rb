@@ -1,4 +1,4 @@
-require_relative '../Weapon.rb'
+require_relative 'Weapon.rb'
 
 
 class SMG < Weapon
@@ -9,16 +9,13 @@ class SMG < Weapon
         @delay = 5
         @projectileDuration = 40
         @projectileSpeed = 5
+        @name = "SMG"
     end
 
-    def getProjectiles#(@x, @y, @angle,@being)
+    def fireProjectiles
         projectiles = []
-        if @triggered && @cooldown == 0
-            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
-            @cooldown = @delay
-        end
-
-        return projectiles
+        projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+        projectiles
     end
 
 end

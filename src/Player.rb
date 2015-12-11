@@ -1,5 +1,5 @@
 require_relative 'AbstractBeing.rb'
-require_relative 'Weapon.rb'
+require_relative 'Weapons/Weapon.rb'
 require_relative 'Weapons/Pistol.rb'
 require_relative 'Weapons/Shotgun.rb'
 require_relative 'Weapons/Sniperrifle.rb'
@@ -21,8 +21,7 @@ class Player < AbstractBeing
         @keyA = 0
         @keyS = 0
         @keyD = 0
-    #    @weapon = Weapon.new(self)
-        @weapon = Shotty.new(self)
+        @weapon = SMG.new(self)
     end
 
     def	update(focus_x, focus_y, offsetX, offsetY)

@@ -1,4 +1,4 @@
-require_relative '../Weapon.rb'
+require_relative 'Weapon.rb'
 
 class Sniperrifle < Weapon
 
@@ -8,18 +8,16 @@ class Sniperrifle < Weapon
         @projectileDuration = 200
         @delay = 60
         @damage = 100
+        @name = "Sniperrifle"
     end
 
-    def getProjectiles
+    def fireProjectiles
         projectiles = []
-        if @triggered && @cooldown == 0
-            projectile = Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
-            projectile.pierce = true
-            projectile.durability = 100
-            projectiles << projectile
-            @cooldown = @delay
-        end
-        return projectiles
+        projectile = Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+        projectile.pierce = true
+        projectile.durability = 100
+        projectiles << projectile
+        projectiles
     end
 
 end

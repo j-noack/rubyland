@@ -1,19 +1,16 @@
-require_relative '../Weapon.rb'
+require_relative 'Weapon.rb'
 
 class Pistol < Weapon
 
     def initialize(being)
         super
+        @name = "Pistol"
     end
 
-    def getProjectiles#(@x, @y, @angle,@being)
+    def fireProjectiles
         projectiles = []
-        if @triggered && @cooldown == 0
-            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
-            @cooldown = @delay
-        end
-
-        return projectiles
+        projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+        projectiles
     end
 
 end

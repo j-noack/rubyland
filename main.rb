@@ -19,7 +19,8 @@ class GameWindow < Gosu::Window
         @map = Map.new(@@SCREEN_WIDTH, @@SCREEN_HEIGHT - mapOffsetY, 8, @highscore)
         @map.y = mapOffsetY
 
-        @lifeBar = Lifebar.new(@map.player)
+        @player = @map.player
+        @lifeBar = Lifebar.new(@player)
     end
 
     def update
@@ -34,6 +35,13 @@ class GameWindow < Gosu::Window
         @map.draw(@font)
         @highscore.draw(@font)
         @lifeBar.draw(@font)
+        weapon = @player.weapon
+        weaponName = "---"
+        unless weapon.nil?
+            weaponName = weapon.name
+        end
+
+        @font.draw("Weapon: #{weaponName}", 1024 - 450, 4, 999)
         @font.draw("Spawned: #{@map.enemyGenerator.count}", 1024 - 250, 4, 999)
         @font.draw("Wave: #{@map.waveCount}", @lifeBar.x + @lifeBar.width + 50, 4, 9)
         @font.draw("Fps: #{Gosu.fps.to_i}", 1024 - 75, 4, 999)

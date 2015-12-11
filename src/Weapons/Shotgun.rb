@@ -1,26 +1,23 @@
-require_relative '../Weapon.rb'
+require_relative 'Weapon.rb'
 
-class Shotty < Weapon
+class Shotgun < Weapon
 
     def initialize(being)
         super
         @damage = 1
         @delay = 50
         @projectileDuration = 65
+        @name = "Shotgun"
     end
 
-    def getProjectiles
+    def fireProjectiles
         projectiles = []
-        if @triggered && @cooldown == 0
-            15.times do
-                projectile = Projectile.new(@x, @y, @angle + rand(30) -15 , @projectileSpeed, rand(@projectileDuration), @damage, @being)
-                projectile.pierce = true
-                projectile.durability = 2
-                projectiles << projectile
-            end
-            @cooldown = @delay
+        15.times do
+            projectile = Projectile.new(@x, @y, @angle + rand(30) -15 , @projectileSpeed, rand(@projectileDuration), @damage, @being)
+            projectile.pierce = true
+            projectile.durability = 2
+            projectiles << projectile
         end
-        return projectiles
+        projectiles
     end
-
 end
