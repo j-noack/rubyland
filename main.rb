@@ -4,7 +4,7 @@ require_relative 'src/Lifebar.rb'
 require_relative 'src/Map.rb'
 
 class GameWindow < Gosu::Window
-    @@VERSION = '0.1 ALPHA'
+    @@VERSION = '0.2 BETA'
     @@SCREEN_WIDTH = 1366
     @@SCREEN_HEIGHT = 768
 
@@ -41,10 +41,10 @@ class GameWindow < Gosu::Window
             weaponName = weapon.name
         end
 
-        @font.draw("Weapon: #{weaponName}", 1024 - 450, 4, 999)
-        @font.draw("Spawned: #{@map.enemyGenerator.count}", 1024 - 250, 4, 999)
+        @font.draw("Weapon: #{weaponName}", @@SCREEN_WIDTH - 450, 4, 999)
+        @font.draw("Spawned: #{@map.enemyGenerator.count}", @@SCREEN_WIDTH - 250, 4, 999)
         @font.draw("Wave: #{@map.waveCount}", @lifeBar.x + @lifeBar.width + 50, 4, 9)
-        @font.draw("Fps: #{Gosu.fps.to_i}", 1024 - 75, 4, 999)
+        @font.draw("Fps: #{Gosu.fps.to_i}", @@SCREEN_WIDTH - 75, 4, 999)
     end
 
     def button_down(id)
