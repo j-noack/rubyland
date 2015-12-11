@@ -46,6 +46,7 @@ class CirclerEnemy < Enemy
 	def initialize
 		super
 		@ai = CirclerAI.new(self)
+        loadSprite('assets/EnemySpriteSheet2.bmp')
 	end
 end
 
