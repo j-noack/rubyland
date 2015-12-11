@@ -22,9 +22,9 @@ class EnemyGenerator
     end
 
     def preSpawn
-        500.times do |i|
-            spawn(@@ENEMY_TYPES.sample, 1)
-            spawn(@@ENEMY_TYPES.sample, 1)
+        250.times do |i|
+            spawn(@@ENEMY_TYPES.sample)
+            spawn(@@ENEMY_TYPES.sample)
         end
     end
 
@@ -37,18 +37,10 @@ class EnemyGenerator
         waveN(@waveCount)
     end
 
-    def waveddN(n)
-        spawn(CirclerEnemy, 1)
-        @@ENEMIES.each do |e|
-            randomize(e)
-        end
-    end
-
     def waveN(n)
         enemies = []
         nextEnemiesCount = n * 5
         diff = nextEnemiesCount - @@ENEMIES.length
-
         # Pre-calculate enemy types
         nextTypes = []
         nextEnemiesCount.times do |i|
@@ -56,17 +48,17 @@ class EnemyGenerator
         end
 
         if diff > 0
-            puts "Allocating #{diff} new enemies."
             # Spawn always random type
-            spawn(nextTypes.sample, diff)
+            diff.times do |i|
+                spawn(nextTypes.sample)
+            end
         end
 
         nextEnemiesCount.times do |i|
-            enemyIndex = @@ENEMIES.find_index do |enemy|
-                enemy.is_a?(nextTypes[i]) && i >= i
+            enemy = @@ENEMIES.find do |enemy|
+                enemy.is_a?(nextTypes[i]) && @@ENEMIES.index(enemy) >= i
             end
 
-            enemy = @@ENEMIES[enemyIndex]
             randomize(enemy)
             enemies << enemy
         end
@@ -74,11 +66,9 @@ class EnemyGenerator
         enemies
     end
 
-    def spawn(enemyClass, n)
-        n.times do |i|
-            enemy = enemyClass.new
-            @@ENEMIES << enemy
-        end
+    def spawn(enemyClass)
+        enemy = enemyClass.new
+        @@ENEMIES << enemy
     end
 
     # TODO: check ai type and create different set of random values
