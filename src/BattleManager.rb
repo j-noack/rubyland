@@ -11,5 +11,8 @@ class BattleManager
 
     def doPlayerCollisionWithEnemy(player, enemy)
         player.hp -= enemy.damage
+        if player.hp < 0
+            player.hp = 0
+        end
     end
 end
