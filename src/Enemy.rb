@@ -57,3 +57,14 @@ class ChargerEnemy < Enemy
 		@ai = ChargerAI.new(self)
 	end
 end
+
+class BlobberEnemy < Enemy
+
+	def initialize
+		super
+		@ai = BlobberAI.new(self)
+        @tileWidth = 60
+        @tileHeight = 60
+        loadSprite('assets/Blobber.bmp')
+	end
+end

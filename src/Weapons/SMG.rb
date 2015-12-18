@@ -14,7 +14,7 @@ class SMG < Weapon
 
     def fireProjectiles
         projectiles = []
-        projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+        projectiles << Projectile.new(@x, @y, @angle -15 + rand(30) , @projectileSpeed, @projectileDuration, @damage, @being)
         projectiles
     end
 

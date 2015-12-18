@@ -67,3 +67,38 @@ class ChargerAI < EnemyAI
 		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @enemy.speed)
 	end
 end
+
+class BlobberAI < EnemyAI
+
+    def initialize(being)
+		super
+        @enemy.maxhp = 10
+        @speed = @enemy.speed;
+        @moveAngle = rand(360)
+    end
+
+    def update
+		super
+        @speed *= 1.05
+        if @speed > @enemy.speed / 2
+            @speed = @enemy.speed / 8
+        end
+
+        if @moveAngle < @enemy.angle && @moveAngle < @enemy.angle + 5
+            @moveAngle += 5
+        end
+
+        if @moveAngle > @enemy.angle && @moveAngle > @enemy.angle - 5
+            @moveAngle -= 5
+        end
+
+    end
+
+	def calcNewX
+		@enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @speed)
+	end
+
+	def calcNewY
+		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @speed)
+	end
+end
