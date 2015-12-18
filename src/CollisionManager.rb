@@ -88,13 +88,14 @@ class CollisionManager
             @battleManager.doCollisionWithBeing(player, projectile)
         end
     end
-	
+
 	def checkPlayerCollisionWithDrops
 		player = @map.player
 		drops = @map.drops
 		drops.each do |drop|
-			if(checkCircleCollision(player, drop))
+			if checkCircleCollision(player, drop)
 				player.weapon = drop.weapon
+                drops.delete(drop)
 			end
 		end
 	end

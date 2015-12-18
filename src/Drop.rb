@@ -18,11 +18,11 @@ class Drop < Drawable
     def draw(offsetX, offsetY)
         @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
     end
-	
+
 	def calcNewX
 		return x
 	end
-	
+
 	def calcNewY
 		return y
 	end

@@ -12,12 +12,15 @@ class Sniperrifle < Weapon
 		@weapontime = 900
     end
 
-    def fireProjectiles
+    def getProjectiles
         projectiles = []
-        projectile = Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
-        projectile.pierce = true
-        projectile.durability = 100
-        projectiles << projectile
+        if @triggered && @cooldown == 0
+            projectile = Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            projectile.pierce = true
+            projectile.durability = 100
+            projectiles << projectile
+            @cooldown = @delay
+        end
         projectiles
     end
 

@@ -11,13 +11,16 @@ class Shotgun < Weapon
 		@weapontime = 900
     end
 
-    def fireProjectiles
+    def getProjectiles
         projectiles = []
-        15.times do
-            projectile = Projectile.new(@x, @y, @angle + rand(30) -15 , @projectileSpeed, rand(@projectileDuration), @damage, @being)
-            projectile.pierce = true
-            projectile.durability = 2
-            projectiles << projectile
+        if @triggered && @cooldown == 0
+            15.times do
+                projectile = Projectile.new(@x, @y, @angle + rand(30) -15 , @projectileSpeed, rand(@projectileDuration), @damage, @being)
+                projectile.pierce = true
+                projectile.durability = 2
+                projectiles << projectile
+            end
+            @cooldown = @delay
         end
         projectiles
     end
