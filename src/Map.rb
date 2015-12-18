@@ -96,9 +96,10 @@ class Map < Drawable
 				if (weapon_number == 2)
 					weapon = Sniperrifle.new(@player)
 				end
-				Drop.new(weapon)
-				Drop.x = enemy.x
-				Drop.y = enemy.y
+				drop = Drop.new(weapon)
+				drop.x = enemy.x
+				drop.y = enemy.y
+				@drops << Drop
 			end
             @enemies.delete(enemy)
         end
