@@ -1,3 +1,5 @@
+require_relative 'Weapons/GlobWeapon.rb'
+
 class EnemyAI
     attr_accessor :enemy
 
@@ -78,9 +80,10 @@ class BlobberAI < EnemyAI
 
     def initialize(being)
 		super
+        #@weapon = GlobberWeapon.new(self)
         @enemy.maxhp = 5
         @speed = @enemy.speed;
-        @moveAngle = rand(360)
+        @moveAngle = 0#rand(360)
     end
 
     def update
@@ -97,6 +100,11 @@ class BlobberAI < EnemyAI
         if @moveAngle > @enemy.angle && @moveAngle > @enemy.angle - 5
             @moveAngle -= 5
         end
+        #unless @weapon.nil?
+        #    @weapon.update(@x, @y, @moveAngle)
+		#	@weapon = GlobberWeapon.new(self)
+        #    @weapon.triggered = true
+        #end
 
     end
 
