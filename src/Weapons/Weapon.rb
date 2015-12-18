@@ -5,6 +5,7 @@ class Weapon < Drawable
     attr_accessor :triggered
     attr_accessor :being
     attr_accessor :name
+	attr_accessor :weapontime
     
     def initialize(being)
         super()
@@ -16,6 +17,7 @@ class Weapon < Drawable
         @triggered = false
         @damage = 1
         @name = "---"
+		@weapontime = 0
     end
 
     # TODO: Waffe and gemalte position anpassen
@@ -24,6 +26,7 @@ class Weapon < Drawable
         @y = playerY
         @angle = playerAngle
         @cooldown -= 1 if @cooldown > 0
+		@weapontime -= 1 if @weapontime > 0
     end
 
     def getProjectiles

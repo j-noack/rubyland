@@ -10,11 +10,15 @@ class SMG < Weapon
         @projectileDuration = 40
         @projectileSpeed = 5
         @name = "SMG"
+		@weapontime = 900
     end
 
-    def fireProjectiles
+    def getProjectiles
         projectiles = []
-        projectiles << Projectile.new(@x, @y, @angle -15 + rand(30) , @projectileSpeed, @projectileDuration, @damage, @being)
+        if @triggered && @cooldown == 0
+            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            @cooldown = @delay
+        end
         projectiles
     end
 

@@ -21,7 +21,7 @@ class Player < AbstractBeing
         @keyA = 0
         @keyS = 0
         @keyD = 0
-        @weapon = SMG.new(self)
+        @weapon = Pistol.new(self)
     end
 
     def	update(focus_x, focus_y, offsetX, offsetY)
@@ -36,6 +36,9 @@ class Player < AbstractBeing
 
         unless @weapon.nil?
             @weapon.update(@x, @y, @angle)
+			if (@weapon.weapontime == 0)
+				@weapon = Pistol.new(self)
+			end
             @weapon.triggered = Gosu.button_down?(Gosu::MsLeft) || Gosu.button_down?(Gosu::KbSpace)
         end
     end
