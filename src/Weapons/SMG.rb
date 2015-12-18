@@ -10,6 +10,7 @@ class SMG < Weapon
         @projectileDuration = 40
         @projectileSpeed = 5
         @name = "SMG"
+		@weapontime = 900
     end
 
     def fireProjectiles

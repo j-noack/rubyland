@@ -5,6 +5,7 @@ class Pistol < Weapon
     def initialize(being)
         super
         @name = "Pistol"
+		@weapontime = -1
     end
 
     def fireProjectiles

@@ -9,6 +9,7 @@ class Sniperrifle < Weapon
         @delay = 60
         @damage = 100
         @name = "Sniperrifle"
+		@weapontime = 900
     end
 
     def fireProjectiles

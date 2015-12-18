@@ -8,6 +8,7 @@ class Shotgun < Weapon
         @delay = 50
         @projectileDuration = 65
         @name = "Shotgun"
+		@weapontime = 900
     end
 
     def fireProjectiles

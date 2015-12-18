@@ -7,8 +7,9 @@ require_relative 'CollisionManager.rb'
 class Map < Drawable
     attr_accessor :player
     attr_accessor :enemies
-    attr_accessor :borderWidth
+	attr_accessor :drops
     attr_accessor :projectiles
+    attr_accessor :borderWidth
     attr_accessor :enemyGenerator
 
     def initialize(width, height, borderWidth, highscore)
@@ -25,6 +26,7 @@ class Map < Drawable
         @enemyGenerator = EnemyGenerator.new(self, @player)
         @enemies = []
         @projectiles = []
+		@drops = []
 
         @collisionManager = CollisionManager.new(self)
         @backgroundImage = Gosu::Image.new('assets/Rubyland.bmp')
@@ -38,11 +40,20 @@ class Map < Drawable
     def update(mouse_x, mouse_y)
         @player.update(mouse_x, mouse_y, x, y)
         getProjectiles(@player)
+		
+		@drops.each do |drop|
+			drop.update
+			if (drop.duration < 1)
+				@drops.delete(drop)
+			end
+		end
 
         if @collisionManager.canPlayerMove?
             @player.moveX if @collisionManager.canPlayerMoveBorderX?
             @player.moveY if @collisionManager.canPlayerMoveBorderY?
         end
+		
+		@collisionManager.checkPlayerCollisionWithDrops
 
         @enemies.each do |enemy|
             enemy.update
@@ -73,6 +84,22 @@ class Map < Drawable
 
         dead_enemies.each do |enemy|
             @highscore.score += enemy.score
+			if (rand(30) == 1)
+				weapon_number = rand(3)
+				weapon = nil
+				if (weapon_number == 0)
+					weapon = SMG.new(@player)
+				end
+				if (weapon_number == 1)
+					weapon = Shotgun.new(@player)
+				end
+				if (weapon_number == 2)
+					weapon = Sniperrifle.new(@player)
+				end
+				Drop.new(weapon)
+				Drop.x = enemy.x
+				Drop.y = enemy.y
+			end
             @enemies.delete(enemy)
         end
 
@@ -88,6 +115,11 @@ class Map < Drawable
 
     def draw(font)
         @backgroundImage.draw(@x, @y, @z)
+		
+		@drops.each do |drop|
+			drop.draw(x, y)
+		end
+		
         @enemies.each do |enemy|
             enemy.draw(x, y)
         end

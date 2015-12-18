@@ -88,6 +88,16 @@ class CollisionManager
             @battleManager.doCollisionWithBeing(player, projectile)
         end
     end
+	
+	def checkPlayerCollisionWithDrops
+		player = @map.player
+		drops = @map.drops
+		drops.each do |drop|
+			if(checkCircleCollision(player, drop))
+				player.weapon = drop.weapon
+			end
+		end
+	end
 
     def checkCircleCollisionWithBeingAndProjectile(being, projectile)
         return false if being == projectile.source
