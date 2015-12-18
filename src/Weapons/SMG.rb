@@ -16,7 +16,7 @@ class SMG < Weapon
     def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
-            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            projectiles << Projectile.new(@x, @y, @angle - 5 + rand(10), @projectileSpeed, @projectileDuration, @damage, @being)
             @cooldown = @delay
         end
         projectiles

@@ -6,6 +6,7 @@ class Pistol < Weapon
         super
         @name = "Pistol"
 		@weapontime = -1
+        @damage = 4
     end
 
     def getProjectiles
