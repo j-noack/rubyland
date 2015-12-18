@@ -6,7 +6,7 @@ class EnemyGenerator
     attr_accessor :waveCount
 
     @@ENEMIES = []
-    @@ENEMY_TYPES = [Enemy, CirclerEnemy, BlobberEnemy]
+    @@ENEMY_TYPES = [ChargerEnemy, Enemy, CirclerEnemy, BlobberEnemy]
 
     def initialize(map, target)
         @map = map

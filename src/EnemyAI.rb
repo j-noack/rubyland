@@ -53,20 +53,26 @@ class ChargerAI < EnemyAI
 
     def initialize(being)
 		super
-        @moveAngle = 0
+        @moveAngle = @enemy.angle
+        @speed = 4#@enemy.speed
+        @timer = 1 + rand(150)
     end
 
     def update
 		super
-        @moveAngle = @moveAngle + 5
+        @timer = @timer - 1
+        if @timer == 0
+            @moveAngle = @enemy.angle
+            @timer = 150
+        end
     end
 
 	def calcNewX
-		@enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @enemy.speed)
+		@enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @speed)
 	end
 
 	def calcNewY
-		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @enemy.speed)
+		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @speed)
 	end
 end
 
