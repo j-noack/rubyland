@@ -72,7 +72,7 @@ class BlobberAI < EnemyAI
 
     def initialize(being)
 		super
-        @enemy.maxhp = 10
+        @enemy.maxhp = 5
         @speed = @enemy.speed;
         @moveAngle = rand(360)
     end

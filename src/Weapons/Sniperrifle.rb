@@ -7,7 +7,7 @@ class Sniperrifle < Weapon
         @projectileSpeed = 15
         @projectileDuration = 200
         @delay = 60
-        @damage = 100
+        @damage = 4
         @name = "Sniperrifle"
 		@weapontime = 900
     end
