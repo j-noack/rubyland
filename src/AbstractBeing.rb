@@ -18,7 +18,6 @@ class AbstractBeing < Drawable
         @tileWidth = 41
         @tileHeight = 41
         @spriteName = ""
-        @spriteImages = []
         self.maxhp = 600
     end
 

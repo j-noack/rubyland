@@ -3,7 +3,7 @@ require_relative 'Drawable.rb'
 class Crosshair < Drawable
     def initialize
         super
-        @spriteImage = Gosu::Image.new('assets/Crosshair2.bmp')
+        loadSprite('assets/Crosshair2.bmp')
     end
 
     def update(mouse_x, mouse_y)
@@ -13,6 +13,6 @@ class Crosshair < Drawable
     end
 
     def draw(offsetX, offsetY)
-        @spriteImage.draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
+        @@LOADED_IMAGES[@spriteName].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
     end
 end

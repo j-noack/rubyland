@@ -1,5 +1,6 @@
 require_relative 'AbstractBeing.rb'
 require_relative 'EnemyAI.rb'
+require_relative 'Weapons/GlobWeapon.rb'
 
 class Enemy < AbstractBeing
     attr_accessor :target
@@ -61,7 +62,7 @@ class ChargerEnemy < Enemy
 
 	def initialize
 		super
-        loadSprite('assets/EnemySpriteSheet.bmp')
+        loadSprite('assets/EnemySpriteSheet3.bmp')
 		@ai = ChargerAI.new(self)
 	end
 end
@@ -70,10 +71,11 @@ class BlobberEnemy < Enemy
 
 	def initialize
 		super
-        loadSprite('assets/Blobber.bmp')
-		@ai = BlobberAI.new(self)
         @tileWidth = 60
         @tileHeight = 60
+        loadSprite('assets/Blobber.bmp')
+        @weapon = GlobberWeapon.new(self)
+		@ai = BlobberAI.new(self)
 	end
 end
 

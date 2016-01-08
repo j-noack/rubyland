@@ -84,8 +84,7 @@ class CollisionManager
 
         player = @map.player
         if checkCircleCollisionWithBeingAndProjectile(player, projectile)
-            puts 'Collision with player'
-            @battleManager.doCollisionWithBeing(player, projectile)
+            @battleManager.doProjectileCollisionWithBeing(player, projectile)
         end
     end
 

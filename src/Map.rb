@@ -29,6 +29,9 @@ class Map < Drawable
         @projectiles = []
 		@drops = []
 
+        @song = Gosu::Song.new('assets/background.ogg')
+        @song.play(true)
+
         @collisionManager = CollisionManager.new(self)
         @backgroundImage = Gosu::Image.new('assets/Rubyland.bmp')
     end

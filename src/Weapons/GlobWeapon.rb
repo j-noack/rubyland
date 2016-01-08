@@ -6,10 +6,11 @@ class GlobberWeapon < Weapon
         super
         @name = "GlobWeapon"
 		@weapontime = -1
-        @damage = 20
+        @damage = 65
         @delay = 360
-        @projectileDuration = 80
+        @projectileDuration = 150
         @projectileSpeed = 2
+        @cooldown = 200
     end
 
     def getProjectiles
