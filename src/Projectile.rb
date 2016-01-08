@@ -18,7 +18,6 @@ class Projectile < Drawable
         @source = source
         @pierce = false
         @durability = 1
-        loadSprite('assets/Bullet.bmp')
     end
 
     def update
@@ -41,4 +40,22 @@ class Projectile < Drawable
     def draw(offsetX, offsetY)
         @@LOADED_IMAGES[@spriteName].draw_rot(@x + offsetX, @y + offsetY - 20, @z, @angle)
     end
+end
+
+class DefaultProjectile < Projectile
+
+    def initialize(startX, startY, angle, speed, duration, damage, source)
+        super
+        loadSprite('assets/Bullet.bmp')
+    end
+
+end
+
+class BlobberProjectile < Projectile
+
+    def initialize(startX, startY, angle, speed, duration, damage, source)
+        super
+        loadSprite('assets/BlobberBullet.bmp')
+    end
+
 end

@@ -8,7 +8,7 @@ class GlobberWeapon < Weapon
 		@weapontime = -1
         @damage = 65
         @delay = 360
-        @projectileDuration = 150
+        @projectileDuration = 450
         @projectileSpeed = 2
         @cooldown = 200
     end
@@ -16,7 +16,7 @@ class GlobberWeapon < Weapon
     def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
-            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            projectiles << BlobberProjectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
             @cooldown = @delay
         end
         projectiles

@@ -3,6 +3,8 @@ require_relative 'EnemyAI.rb'
 require_relative 'Weapons/GlobWeapon.rb'
 
 class Enemy < AbstractBeing
+    @@LOADED_SOUNDS = {}
+
     attr_accessor :target
     attr_accessor :score
     attr_accessor :damage
@@ -15,7 +17,23 @@ class Enemy < AbstractBeing
         @score = 5
         @damage = 1
         @enabled = false
+        @soundName = ""
         self.maxhp = 1
+        loadSound('assets/weaponpickup.wav')
+    end
+
+    def playDeath
+        if @@LOADED_SOUNDS.has_key?(@soundName)
+            @@LOADED_SOUNDS[@soundName].play
+        end
+    end
+
+    def loadSound(file)
+        unless @@LOADED_SOUNDS.has_key?(file)
+            @@LOADED_SOUNDS[file] = Gosu::Sample.new(file)
+        end
+
+        @soundName = file
     end
 
     def update

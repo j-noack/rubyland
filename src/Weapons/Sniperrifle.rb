@@ -10,12 +10,13 @@ class Sniperrifle < Weapon
         @damage = 4
         @name = "Sniperrifle"
 		@weapontime = 900
+        loadSound('assets/Bulletsound.wav')
     end
 
     def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
-            projectile = Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            projectile = DefaultProjectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
             projectile.pierce = true
             projectile.durability = 100
             projectiles << projectile

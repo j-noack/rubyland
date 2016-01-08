@@ -52,7 +52,7 @@ class EnemyGenerator
 
     def waveN(n)
         enemies = []
-        nextEnemiesCount = n * 5
+        nextEnemiesCount = n * 3
         diff = nextEnemiesCount - @@ENEMIES.length
         # Pre-calculate enemy types
         nextTypes = []

@@ -11,12 +11,13 @@ class SMG < Weapon
         @projectileSpeed = 5
         @name = "SMG"
 		@weapontime = 900
+        loadSound('assets/smg.wav')
     end
 
     def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
-            projectiles << Projectile.new(@x, @y, @angle - 5 + rand(10), @projectileSpeed, @projectileDuration, @damage, @being)
+            projectiles << DefaultProjectile.new(@x, @y, @angle - 5 + rand(10), @projectileSpeed, @projectileDuration, @damage, @being)
             @cooldown = @delay
         end
         projectiles

@@ -30,6 +30,7 @@ class Map < Drawable
 		@drops = []
 
         @song = Gosu::Song.new('assets/background.ogg')
+        @song.volume = 0.75
         @song.play(true)
 
         @collisionManager = CollisionManager.new(self)
@@ -105,6 +106,8 @@ class Map < Drawable
 				drop.y = enemy.y
 				@drops << drop
 			end
+
+            enemy.playDeath
             @enemies.delete(enemy)
         end
 

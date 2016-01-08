@@ -1,4 +1,5 @@
 require_relative 'BattleManager.rb'
+require_relative 'Enemy.rb'
 
 class CollisionManager
     attr_accessor :map
@@ -77,8 +78,10 @@ class CollisionManager
     def checkProjectileCollisionsWithBeing(projectile)
         enemies = @map.enemies
         enemies.each do |enemy|
-            if checkCircleCollisionWithBeingAndProjectile(enemy, projectile)
-                @battleManager.doProjectileCollisionWithBeing(enemy, projectile)
+            unless projectile.source.is_a?(Enemy)
+                if checkCircleCollisionWithBeingAndProjectile(enemy, projectile)
+                    @battleManager.doProjectileCollisionWithBeing(enemy, projectile)
+                end
             end
         end
 

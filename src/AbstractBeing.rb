@@ -71,7 +71,7 @@ class AbstractBeing < Drawable
         projectiles = []
 
         unless @weapon.nil?
-            projectiles.concat(@weapon.getProjectiles) if @weapon.triggered
+            projectiles.concat(@weapon.fire) if @weapon.triggered
         end
 
         projectiles

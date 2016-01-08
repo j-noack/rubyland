@@ -7,12 +7,13 @@ class Pistol < Weapon
         @name = "Pistol"
 		@weapontime = -1
         @damage = 1
+        loadSound('assets/Bulletsound.wav')
     end
 
     def getProjectiles
         projectiles = []
         if @triggered && @cooldown == 0
-            projectiles << Projectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
+            projectiles << DefaultProjectile.new(@x, @y, @angle, @projectileSpeed, @projectileDuration, @damage, @being)
             @cooldown = @delay
         end
         projectiles
