@@ -61,7 +61,7 @@ class ChargerEnemy < Enemy
 
 	def initialize
 		super
-        loadSprite('assets/EnemySpriteSheet.bmp')
+        loadSprite('assets/EnemySpriteSheet3.bmp')
 		@ai = ChargerAI.new(self)
 	end
 end
@@ -70,9 +70,9 @@ class BlobberEnemy < Enemy
 
 	def initialize
 		super
-        loadSprite('assets/Blobber.bmp')
-		@ai = BlobberAI.new(self)
         @tileWidth = 60
         @tileHeight = 60
+        loadSprite('assets/Blobber.bmp')
+		@ai = BlobberAI.new(self)
 	end
 end
