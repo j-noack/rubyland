@@ -22,23 +22,9 @@ class EnemyGenerator
     end
 
     def preSpawn
-        threads = []
         @@ENEMY_TYPES.each do |type|
-            thread = Thread.new {
-                Thread.current["name"] = type
-                preSpawnType(type)
-            }
-
-            threads << thread
+            spawn(type, 125)
         end
-
-        threads.each do |t|
-            t.join
-        end
-    end
-
-    def preSpawnType(type)
-        spawn(type, 125)
     end
 
     def count
