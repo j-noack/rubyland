@@ -16,7 +16,7 @@ class Drop < Drawable
     end
 
     def draw(offsetX, offsetY)
-        @spriteImage.draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
+        @@LOADED_IMAGES[@spriteName].draw_rot(@x + offsetX, @y + offsetY, @z, 0.0)
     end
 
 	def calcNewX

@@ -100,11 +100,11 @@ class BlobberAI < EnemyAI
         if @moveAngle > @enemy.angle && @moveAngle > @enemy.angle - 5
             @moveAngle -= 5
         end
-        #unless @weapon.nil?
-        #    @weapon.update(@x, @y, @moveAngle)
-		#	@weapon = GlobberWeapon.new(self)
-        #    @weapon.triggered = true
-        #end
+
+        unless @enemy.weapon.nil?
+            @enemy.weapon.update(@enemy.x, @enemy.y, @moveAngle)
+            @enemy.weapon.triggered = true
+        end
 
     end
 

@@ -39,6 +39,6 @@ class Projectile < Drawable
     end
 
     def draw(offsetX, offsetY)
-        @spriteImage.draw_rot(@x + offsetX, @y + offsetY - 20, @z, @angle)
+        @@LOADED_IMAGES[@spriteName].draw_rot(@x + offsetX, @y + offsetY - 20, @z, @angle)
     end
 end
