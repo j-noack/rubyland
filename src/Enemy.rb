@@ -96,3 +96,12 @@ class BlobberEnemy < Enemy
 		@ai = BlobberAI.new(self)
 	end
 end
+
+class BossEnemy < Enemy
+
+	def initialize
+		super
+		loadSprite('assets/EnemySpriteSheet.bmp')
+		@ai = BossAI.new(self)
+	end
+end
