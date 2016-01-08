@@ -6,7 +6,7 @@ class EnemyGenerator
     attr_accessor :waveCount
 
     @@ENEMIES = []
-    @@ENEMY_TYPES = [ChargerEnemy, Enemy, CirclerEnemy, BlobberEnemy]
+    @@ENEMY_TYPES = [ChargerEnemy, DefaultEnemy, CirclerEnemy, BlobberEnemy]
 
     def initialize(map, target)
         @map = map
@@ -22,9 +22,23 @@ class EnemyGenerator
     end
 
     def preSpawn
-        400.times do |i|
-            spawn(@@ENEMY_TYPES.sample)
+        threads = []
+        @@ENEMY_TYPES.each do |type|
+            thread = Thread.new {
+                Thread.current["name"] = type
+                preSpawnType(type)
+            }
+
+            threads << thread
         end
+
+        threads.each do |t|
+            t.join
+        end
+    end
+
+    def preSpawnType(type)
+        spawn(type, 125)
     end
 
     def count
@@ -71,9 +85,9 @@ class EnemyGenerator
         enemies
     end
 
-    def spawn(enemyClass)
-        enemy = enemyClass.new
-        @@ENEMIES << enemy
+    def spawn(enemyClass, count = 1)
+        enemies = Array.new(count) { enemyClass.new }
+        @@ENEMIES.concat(enemies)
     end
 
     # TODO: check ai type and create different set of random values

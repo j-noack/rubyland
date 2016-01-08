@@ -14,7 +14,6 @@ class Enemy < AbstractBeing
         @score = 5
         @damage = 1
         @enabled = false
-        loadSprite('assets/EnemySpriteSheet.bmp')
         self.maxhp = 1
     end
 
@@ -41,12 +40,20 @@ class Enemy < AbstractBeing
     end
 end
 
+class DefaultEnemy < Enemy
+
+    def initialize
+        super
+        loadSprite('assets/EnemySpriteSheet.bmp')
+    end
+end
+
 class CirclerEnemy < Enemy
 
 	def initialize
 		super
-		@ai = CirclerAI.new(self)
         loadSprite('assets/EnemySpriteSheet2.bmp')
+		@ai = CirclerAI.new(self)
 	end
 end
 
@@ -54,6 +61,7 @@ class ChargerEnemy < Enemy
 
 	def initialize
 		super
+        loadSprite('assets/EnemySpriteSheet3.bmp')
 		@ai = ChargerAI.new(self)
 	end
 end
@@ -62,9 +70,9 @@ class BlobberEnemy < Enemy
 
 	def initialize
 		super
-		@ai = BlobberAI.new(self)
         @tileWidth = 60
         @tileHeight = 60
         loadSprite('assets/Blobber.bmp')
+		@ai = BlobberAI.new(self)
 	end
 end
