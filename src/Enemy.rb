@@ -76,3 +76,12 @@ class BlobberEnemy < Enemy
         @tileHeight = 60
 	end
 end
+
+class BossEnemy < Enemy
+
+	def initialize
+		super
+		loadSprite('assets/EnemySpriteSheet.bmp')
+		@ai = BossAI.new(self)
+	end
+end
