@@ -84,7 +84,6 @@ class BlobberAI < EnemyAI
 
     def initialize(being)
 		super
-        @enemy.maxhp = 5
         @speed = @enemy.speed;
         @moveAngle = 0#rand(360)
     end
@@ -123,14 +122,13 @@ end
 class BossAI < EnemyAI
 	def initialize(being)
 		super
-		@enemy.maxhp = 500
 		@turnspeed = 0.06
 		@acceleration = 1.02
 		@slowdown = 0.35
 		@statetime0 = 1200
 		@statetime1 = 150
         @statetime2 = 420
-        @spawnFrequency = 30
+        @spawnFrequency = 35
 		@timer = @statetime0
         @spawnTimer = @spawnFrequency
 		@state = 0

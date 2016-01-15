@@ -18,6 +18,7 @@ class Enemy < AbstractBeing
         @damage = 1
         @enabled = false
         @soundName = ""
+        @kamikaze = false
         self.maxhp = 1
         loadSound('assets/enemydeath.wav')
     end
@@ -26,6 +27,10 @@ class Enemy < AbstractBeing
         if Cache.Assets.has_key?(@soundName)
             Cache.Assets[@soundName].play
         end
+    end
+
+    def kamikaze?
+        return @kamikaze
     end
 
     def loadSound(file)
@@ -72,6 +77,13 @@ class DefaultEnemy < Enemy
         super
         loadSprite('assets/EnemySpriteSheet.bmp')
     end
+
+    def randomize(target)
+        resetHp
+        @target = target
+        @speed = rand(75) * 0.01 + 0.75
+        @enabled = true
+    end
 end
 
 class CirclerEnemy < Enemy
@@ -81,6 +93,13 @@ class CirclerEnemy < Enemy
         loadSprite('assets/EnemySpriteSheet2.bmp')
 		@ai = CirclerAI.new(self)
 	end
+
+    def randomize(target)
+        resetHp
+        @target = target
+        @speed = rand(75) * 0.01 + 0.75
+        @enabled = true
+    end
 end
 
 class ChargerEnemy < Enemy
@@ -106,11 +125,12 @@ class BlobberEnemy < Enemy
         loadSprite('assets/Blobber.bmp')
         @weapon = GlobberWeapon.new(self)
 		@ai = BlobberAI.new(self)
+        self.maxhp = 10
 	end
 
     def randomize(target)
         super
-        @speed = 0.1
+        @speed = 0.5
         @ai.speed = @speed
         @ai.moveAngle = @angle
     end
@@ -120,9 +140,12 @@ class BossEnemy < Enemy
 
 	def initialize
 		super
-		loadSprite('assets/EnemySpriteSheet.bmp')
+        @tileWidth = 131
+        @tileHeight = 131
+		loadSprite('assets/BossSpriteSheet.bmp')
 		@ai = BossAI.new(self)
         @lifebar = BossLifebar.new(self)
+        self.maxhp = 500
 	end
 
     def randomize(target)
@@ -147,8 +170,11 @@ class RocketEnemy < Enemy
 
 	def initialize
 		super
-		loadSprite('assets/EnemySpriteSheet2.bmp')
+        @tileWidth = 40
+        @tileHeight = 40
+		loadSprite('assets/Rocket.bmp')
 		@ai = RocketAI.new(self)
+        @kamikaze = true
 	end
 
 	def randomize(target)
@@ -157,4 +183,8 @@ class RocketEnemy < Enemy
 		@ai.speed = @speed
 		@ai.moveAngle = @angle + 60 + rand(240)
 	end
+
+    def damage
+        return 50
+    end
 end

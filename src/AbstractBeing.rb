@@ -35,9 +35,9 @@ class AbstractBeing < Drawable
             Cache.Assets[sprite] = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
         end
 
-        # TODO das is iwie bogus
-        @width = 25
-        @height = 25
+        spriteImage = Cache.Assets[sprite][0]
+        @width = spriteImage.width - 8
+        @height = spriteImage.height - 8
     end
 
     def damage

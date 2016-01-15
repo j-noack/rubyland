@@ -7,9 +7,9 @@ class Sniperrifle < Weapon
         @projectileSpeed = 15
         @projectileDuration = 200
         @delay = 60
-        @damage = 4
+        @damage = 1
         @name = "Sniperrifle"
-		@weapontime = 900
+		@weapontime = 600
         loadSound('assets/sniperrifle.wav')
     end
 

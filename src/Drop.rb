@@ -9,6 +9,21 @@ class Drop < Drawable
         @weapon = weapon
 		loadSprite('assets/' + @weapon.name + '.bmp')
 		@duration = 600
+        loadSound('assets/weaponpickup.wav')
+    end
+
+    def loadSound(file)
+        unless Cache.Assets.has_key?(file)
+            Cache.Assets[file] = Gosu::Sample.new(file)
+        end
+
+        @soundName = file
+    end
+
+    def playSound
+        if Cache.Assets.has_key?(@soundName)
+            Cache.Assets[@soundName].play(0.55)
+        end
     end
 
     def update

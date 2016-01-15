@@ -5,7 +5,13 @@ class EnemyGenerator
     attr_accessor :waveCount
 
     @@ENEMIES = []
-    @@ENEMY_TYPES = [ChargerEnemy, DefaultEnemy, CirclerEnemy, BlobberEnemy]
+
+    @@ENEMY_TYPES = {
+        DefaultEnemy => 1,
+        ChargerEnemy => 0.33,
+        CirclerEnemy => 0.75,
+        BlobberEnemy => 0.25
+    }
 
     def initialize(map, target)
         @map = map
@@ -21,7 +27,7 @@ class EnemyGenerator
     end
 
     def preSpawn
-        @@ENEMY_TYPES.each do |type|
+        @@ENEMY_TYPES.keys.each do |type|
             spawn(type, 125)
         end
     end
@@ -33,7 +39,7 @@ class EnemyGenerator
     def nextWave
         @waveCount += 1
 
-        if (@waveCount == 1)
+        if (@waveCount % 10 == 0)
             spawnFirstBoss
         else
             waveN(@waveCount)
@@ -46,8 +52,19 @@ class EnemyGenerator
         diff = nextEnemiesCount - @@ENEMIES.length
         # Pre-calculate enemy types
         nextTypes = []
+
+        randSize = @@ENEMY_TYPES.values.reduce(&:+)
         nextEnemiesCount.times do |i|
-            nextTypes << @@ENEMY_TYPES.sample
+            random = rand(100 * randSize) + 1
+
+            sum = 0
+            @@ENEMY_TYPES.each do |key, value|
+                sum += (value * 100)
+                if random <= sum
+                    nextTypes << key
+                    break
+                end
+            end
         end
 
         if diff > 0

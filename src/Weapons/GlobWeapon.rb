@@ -6,7 +6,7 @@ class GlobberWeapon < Weapon
         super
         @name = "GlobWeapon"
 		@weapontime = -1
-        @damage = 65
+        @damage = 35
         @delay = 360
         @projectileDuration = 450
         @projectileSpeed = 2

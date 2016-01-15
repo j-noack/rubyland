@@ -97,6 +97,7 @@ class CollisionManager
 		drops.each do |drop|
 			if checkCircleCollision(player, drop)
 				player.weapon = drop.weapon
+                drop.playSound
                 drops.delete(drop)
 			end
 		end

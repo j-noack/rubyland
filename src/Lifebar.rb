@@ -46,6 +46,6 @@ class BossLifebar < Lifebar
         font.draw('BOSS: ', @x, @y - 4, 9, 1, 1, Gosu::Color::WHITE)
         Gosu.draw_rect(@x + 35, @y + 1, @width, @height, Gosu::Color::BLACK)
         Gosu.draw_rect(@x + 36, @y + 2, @width - 2, @height - 2, Gosu::Color::GRAY)
-        Gosu.draw_rect(@x + 36, @y + 2, @progessWidth, @height - 2, Gosu::Color::GREEN)
+        Gosu.draw_rect(@x + 36, @y + 2, @progessWidth, @height - 2, Gosu::Color::RED)
     end
 end

@@ -14,5 +14,9 @@ class BattleManager
         if player.hp < 0
             player.hp = 0
         end
+
+        if enemy.kamikaze?
+            enemy.hp = 0
+        end
     end
 end
