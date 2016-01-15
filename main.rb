@@ -9,7 +9,7 @@ class GameWindow < Gosu::Window
     @@SCREEN_HEIGHT = 768
 
     def initialize
-        super(@@SCREEN_WIDTH, @@SCREEN_HEIGHT)
+        super(@@SCREEN_WIDTH, @@SCREEN_HEIGHT, true)
         self.caption = "Rubyland #{@@VERSION}"
 
         @font = Gosu::Font.new(25, name: 'assets/Amble-Regular.ttf')
