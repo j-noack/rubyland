@@ -131,3 +131,19 @@ class BossEnemy < Enemy
         @ai.moveAngle = @angle
     end
 end
+
+class RocketEnemy < Enemy
+	
+	def initialize
+		super
+		loadSprite('assets/EnemySpriteSheet.bmp')
+		@ai = BossAI.new(self)
+	end
+	
+	def randomize(target)
+		super
+		@speed = 0.5
+		@ai.speed = @speed
+		@ai.moveAngle = @angle + 60 + rand(240)
+	end
+end
