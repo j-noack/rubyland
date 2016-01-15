@@ -19,7 +19,7 @@ class Enemy < AbstractBeing
         @enabled = false
         @soundName = ""
         self.maxhp = 1
-        loadSound('assets/weaponpickup.wav')
+        loadSound('assets/enemydeath.wav')
     end
 
     def playDeath

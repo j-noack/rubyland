@@ -10,7 +10,7 @@ class Sniperrifle < Weapon
         @damage = 4
         @name = "Sniperrifle"
 		@weapontime = 900
-        loadSound('assets/Bulletsound.wav')
+        loadSound('assets/sniperrifle.wav')
     end
 
     def getProjectiles
