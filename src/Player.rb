@@ -63,7 +63,7 @@ class Player < AbstractBeing
         @y = calcNewY
     end
 
-    def draw(offsetX, offsetY)
+    def draw(offsetX, offsetY, font)
         super
         @crosshair.draw(offsetX, offsetY)
     end

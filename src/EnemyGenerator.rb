@@ -1,12 +1,11 @@
 require_relative 'Enemy.rb'
-require 'benchmark'
 
 class EnemyGenerator
     attr_accessor :target
     attr_accessor :waveCount
 
     @@ENEMIES = []
-    @@ENEMY_TYPES = [BossEnemy]#ChargerEnemy, DefaultEnemy, CirclerEnemy, BlobberEnemy]
+    @@ENEMY_TYPES = [ChargerEnemy, DefaultEnemy, CirclerEnemy, BlobberEnemy]
 
     def initialize(map, target)
         @map = map
@@ -33,7 +32,12 @@ class EnemyGenerator
 
     def nextWave
         @waveCount += 1
-        waveN(@waveCount)
+
+        if (@waveCount == 1)
+            spawnFirstBoss
+        else
+            waveN(@waveCount)
+        end
     end
 
     def waveN(n)
@@ -104,5 +108,19 @@ class EnemyGenerator
             enemy.x = @map.borderWidth - @spriteSize + @mapW - 50 + rand(50)
             enemy.y = @map.borderWidth + @spriteSize + rand(@mapH - (@spriteSize * 2))
         end
+    end
+
+    def customSpawn(type, x, y)
+        enemy = type.new
+        enemy.randomize(@target)
+        enemy.x = x
+        enemy.y = y
+        enemy.ai.enemyGenerator = self
+
+        @map.customSpawn(enemy)
+    end
+
+    def spawnFirstBoss
+        customSpawn(BossEnemy, 200, 200)
     end
 end

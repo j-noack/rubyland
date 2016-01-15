@@ -1,12 +1,15 @@
 require_relative 'Weapons/GlobWeapon.rb'
+require_relative 'Enemy.rb'
 
 class EnemyAI
     attr_accessor :enemy
     attr_accessor :speed
     attr_accessor :moveAngle
+    attr_accessor :enemyGenerator
 
     def initialize(enemy)
         @enemy = enemy
+        @enemyGenerator = nil
         @ratio = 0
         @distance = 0
     end
@@ -120,21 +123,28 @@ end
 class BossAI < EnemyAI
 	def initialize(being)
 		super
-		@enemy.maxhp = 50
-		@turnspeed = 0.15
-		@acceleration = 1.03
-		@slowdown = 0.5
-		@statetime0 = 900
-		@statetime1 = 30
+		@enemy.maxhp = 500
+		@turnspeed = 0.06
+		@acceleration = 1.02
+		@slowdown = 0.35
+		@statetime0 = 1200
+		@statetime1 = 150
         @statetime2 = 420
+        @spawnFrequency = 30
 		@timer = @statetime0
+        @spawnTimer = @spawnFrequency
 		@state = 0
 	end
 
 	def update
 		@timer -= 1
 		if (@state == 0)
+            @spawnTimer -= 1
 			@moveAngle = @enemy.angle
+            if (@spawnTimer <= 0)
+                @enemyGenerator.customSpawn(RocketEnemy, @enemy.x, @enemy.y)
+                @spawnTimer =  @spawnFrequency
+            end
 			if (@timer <= 0)
 				@speed = 0
 				@timer = @statetime1
@@ -189,13 +199,13 @@ end
 
 class RocketAI < EnemyAI
 
-	def initialize
+	def initialize(being)
 		super
 		@turnspeed = 0.05
-		@turnAcceleration = 1.03
+		@turnAcceleration = 0.002
 		@speedup = 0.005
 	end
-	
+
 	def update
 		diff = @enemy.angle - @moveAngle
         if (diff < -180)

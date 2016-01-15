@@ -61,7 +61,7 @@ class AbstractBeing < Drawable
         @angle += 360 if @angle < 0
     end
 
-    def draw(offsetX, offsetY)
+    def draw(offsetX, offsetY, font)
         mySprite[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
     end
 

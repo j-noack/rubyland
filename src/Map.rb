@@ -129,10 +129,10 @@ class Map < Drawable
 		end
 
         @enemies.each do |enemy|
-            enemy.draw(x, y)
+            enemy.draw(x, y, font)
         end
 
-        @player.draw(x, y)
+        @player.draw(x, y, font)
 
         @projectiles.each do |projectile|
             projectile.draw(x, y)
@@ -146,5 +146,9 @@ class Map < Drawable
 
     def waveCount
         @enemyGenerator.waveCount
+    end
+
+    def customSpawn(enemy)
+        @enemies.concat([enemy])
     end
 end

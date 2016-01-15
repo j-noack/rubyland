@@ -1,14 +1,14 @@
 require_relative 'AbstractBeing.rb'
 require_relative 'EnemyAI.rb'
+require_relative 'Lifebar.rb'
 require_relative 'Weapons/GlobWeapon.rb'
 
 class Enemy < AbstractBeing
-    @@LOADED_SOUNDS = {}
-
     attr_accessor :target
     attr_accessor :score
     attr_accessor :damage
     attr_accessor :enabled
+    attr_accessor :ai
 
     def initialize
         super
@@ -23,14 +23,14 @@ class Enemy < AbstractBeing
     end
 
     def playDeath
-        if @@LOADED_SOUNDS.has_key?(@soundName)
-            @@LOADED_SOUNDS[@soundName].play
+        if Cache.Assets.has_key?(@soundName)
+            Cache.Assets[@soundName].play
         end
     end
 
     def loadSound(file)
-        unless @@LOADED_SOUNDS.has_key?(file)
-            @@LOADED_SOUNDS[file] = Gosu::Sample.new(file)
+        unless Cache.Assets.has_key?(file)
+            Cache.Assets[file] = Gosu::Sample.new(file)
         end
 
         @soundName = file
@@ -122,6 +122,7 @@ class BossEnemy < Enemy
 		super
 		loadSprite('assets/EnemySpriteSheet.bmp')
 		@ai = BossAI.new(self)
+        @lifebar = BossLifebar.new(self)
 	end
 
     def randomize(target)
@@ -130,16 +131,26 @@ class BossEnemy < Enemy
         @ai.speed = @speed
         @ai.moveAngle = @angle
     end
+
+    def draw(offsetX, offsetY, font)
+        super
+        @lifebar.draw(font)
+    end
+
+    def update
+        super
+        @lifebar.update
+    end
 end
 
 class RocketEnemy < Enemy
-	
+
 	def initialize
 		super
-		loadSprite('assets/EnemySpriteSheet.bmp')
-		@ai = BossAI.new(self)
+		loadSprite('assets/EnemySpriteSheet2.bmp')
+		@ai = RocketAI.new(self)
 	end
-	
+
 	def randomize(target)
 		super
 		@speed = 0.5
