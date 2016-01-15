@@ -4,7 +4,7 @@ require_relative 'src/Lifebar.rb'
 require_relative 'src/Map.rb'
 
 class GameWindow < Gosu::Window
-    @@VERSION = '0.2 BETA'
+    @@VERSION = '1.0'
     @@SCREEN_WIDTH = 1366
     @@SCREEN_HEIGHT = 768
 
