@@ -158,7 +158,6 @@ class BossAI < EnemyAI
                 diff -= 360
             end
 
-            puts "Diff: #{diff}"
 			if (diff > 0)
 				@moveAngle += @turnspeed
 			else
@@ -177,6 +176,41 @@ class BossAI < EnemyAI
 				@state = 0
 			end
 		end
+	end
+
+	def calcNewX
+		@enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @speed)
+	end
+
+	def calcNewY
+		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @speed)
+	end
+end
+
+class RocketAI < EnemyAI
+
+	def initialize
+		super
+		@turnspeed = 0.05
+		@turnAcceleration = 1.03
+		@speedup = 0.005
+	end
+	
+	def update
+		diff = @enemy.angle - @moveAngle
+        if (diff < -180)
+            diff += 360
+        end
+        if (diff > 180)
+            diff -= 360
+        end
+		if (diff > 0)
+			@moveAngle += @turnspeed
+		else
+			@moveAngle -= @turnspeed
+		end
+		@turnspeed += @turnAcceleration
+		@speed += @speedup
 	end
 
 	def calcNewX

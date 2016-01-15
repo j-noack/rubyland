@@ -1,6 +1,6 @@
-class Drawable
-    @@LOADED_IMAGES = {}
+require_relative 'Cache.rb'
 
+class Drawable
     attr_accessor :x
     attr_accessor :y
     attr_accessor :z
@@ -25,11 +25,15 @@ class Drawable
     def loadSprite(sprite)
         @spriteName = sprite
 
-        unless @@LOADED_IMAGES.has_key?(sprite)
-            @@LOADED_IMAGES[sprite] = Gosu::Image.new(sprite)
+        unless Cache.Assets.has_key?(sprite)
+            Cache.Assets[sprite] = Gosu::Image.new(sprite)
         end
 
-        @width = @@LOADED_IMAGES[sprite].width
-        @height = @@LOADED_IMAGES[sprite].height
+        @width = Cache.Assets[sprite].width
+        @height = Cache.Assets[sprite].height
+    end
+
+    def mySprite
+        return Cache.Assets[@spriteName]
     end
 end

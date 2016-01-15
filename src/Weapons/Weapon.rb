@@ -2,8 +2,6 @@ require_relative '../Drawable.rb'
 require_relative '../Projectile.rb'
 
 class Weapon < Drawable
-    @@LOADED_SOUNDS = {}
-
     attr_accessor :triggered
     attr_accessor :being
     attr_accessor :name
@@ -24,8 +22,8 @@ class Weapon < Drawable
     end
 
     def loadSound(file)
-        unless @@LOADED_SOUNDS.has_key?(file)
-            @@LOADED_SOUNDS[file] = Gosu::Sample.new(file)
+        unless Cache.Assets.has_key?(file)
+            Cache.Assets[file] = Gosu::Sample.new(file)
         end
 
         @soundName = file
@@ -44,8 +42,8 @@ class Weapon < Drawable
         projectiles = getProjectiles
 
         unless projectiles.empty?
-            if @@LOADED_SOUNDS.has_key?(@soundName)
-                @@LOADED_SOUNDS[@soundName].play(0.55)
+            if Cache.Assets.has_key?(@soundName)
+                Cache.Assets[@soundName].play(0.55)
             end
         end
 
