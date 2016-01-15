@@ -156,7 +156,7 @@ class BossAI < EnemyAI
 					@moveAngle -= @turnspeed
 				end
 			end
-			if (diff > 90 && diff < 180 || diff < -90 && diff > -180 || diff > 270 || diff <-270)
+			if (diff > 90 && diff < 270 || diff < -90 && diff > -270)
 				@speed = @speed * @acceleration
 			else
 				@speed = @speed - @slowdown
