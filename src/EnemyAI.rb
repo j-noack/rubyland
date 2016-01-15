@@ -121,11 +121,12 @@ class BossAI < EnemyAI
 	def initialize(being)
 		super
 		@enemy.maxhp = 50
-		@turnspeed = 0.5
-		@acceleration = 1.05
-		@slowdown = 0.1
-		@statetime0 = 55
+		@turnspeed = 0.15
+		@acceleration = 1.03
+		@slowdown = 0.5
+		@statetime0 = 900
 		@statetime1 = 30
+        @statetime2 = 420
 		@timer = @statetime0
 		@state = 0
 	end
@@ -144,24 +145,33 @@ class BossAI < EnemyAI
 			@moveAngle = @enemy.angle
 			if (@timer <= 0)
 				@speed = 0.1
+                @timer = @statetime2
 				@state = 2
 			end
 		end
 		if (@state == 2)
 			diff = @enemy.angle - @moveAngle
-			if (@enemy.angle != @moveAngle)
-				if (diff < 180 && diff > 0 || diff < -180)
-					@moveAngle += @turnspeed
-				else
-					@moveAngle -= @turnspeed
-				end
-			end
-			if (diff > 90 && diff < 270 || diff < -90 && diff > -270)
-				@speed = @speed * @acceleration
+            if (diff < -180)
+                diff += 360
+            end
+            if (diff > 180)
+                diff -= 360
+            end
+
+            puts "Diff: #{diff}"
+			if (diff > 0)
+				@moveAngle += @turnspeed
 			else
-				@speed = @speed - @slowdown
+				@moveAngle -= @turnspeed
 			end
-			if (@speed <= 0)
+			if (diff > 90 || diff < -90)
+                @speed = @speed - @slowdown
+			else
+                if (@speed < (@enemy.target.width - 5))
+                    @speed = @speed * @acceleration
+                end
+			end
+			if (@speed <= 0 || @timer <= 0)
 				@speed = @enemy.speed
 				@timer = @statetime0
 				@state = 0
