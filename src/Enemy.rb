@@ -57,6 +57,13 @@ class Enemy < AbstractBeing
     def moveY
         @y = calcNewY
     end
+
+    def randomize(target)
+        resetHp
+        @target = target
+        @speed = rand(150) * 0.01 + 0.1
+        @enabled = true
+    end
 end
 
 class DefaultEnemy < Enemy
@@ -83,6 +90,11 @@ class ChargerEnemy < Enemy
         loadSprite('assets/EnemySpriteSheet3.bmp')
 		@ai = ChargerAI.new(self)
 	end
+
+    def randomize(target)
+        super
+        @ai.moveAngle = @angle
+    end
 end
 
 class BlobberEnemy < Enemy
@@ -95,6 +107,13 @@ class BlobberEnemy < Enemy
         @weapon = GlobberWeapon.new(self)
 		@ai = BlobberAI.new(self)
 	end
+
+    def randomize(target)
+        super
+        @speed = 0.1
+        @ai.speed = @speed
+        @ai.moveAngle = @angle
+    end
 end
 
 class BossEnemy < Enemy
@@ -104,4 +123,11 @@ class BossEnemy < Enemy
 		loadSprite('assets/EnemySpriteSheet.bmp')
 		@ai = BossAI.new(self)
 	end
+
+    def randomize(target)
+        super
+        @speed = 0.1
+        @ai.speed = @speed
+        @ai.moveAngle = @angle
+    end
 end

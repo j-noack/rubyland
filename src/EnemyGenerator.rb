@@ -6,7 +6,7 @@ class EnemyGenerator
     attr_accessor :waveCount
 
     @@ENEMIES = []
-    @@ENEMY_TYPES = [ChargerEnemy, DefaultEnemy, CirclerEnemy, BlobberEnemy]
+    @@ENEMY_TYPES = [BossEnemy]#ChargerEnemy, DefaultEnemy, CirclerEnemy, BlobberEnemy]
 
     def initialize(map, target)
         @map = map
@@ -78,11 +78,7 @@ class EnemyGenerator
 
     # TODO: check ai type and create different set of random values
     def randomize(enemy)
-        enemy.resetHp
-        enemy.target = @target
-        enemy.speed = rand(150) * 0.01 + 0.1
-        enemy.enabled = true
-
+        enemy.randomize(@target)
         randomizePosition(enemy)
     end
 
