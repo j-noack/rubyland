@@ -1,8 +1,6 @@
 require_relative 'Drawable.rb'
 
 class AbstractBeing < Drawable
-    @@LOADED_SPRITES = {}
-
     attr_reader :maxhp
     attr_accessor :hp
     attr_accessor :speed
@@ -33,8 +31,8 @@ class AbstractBeing < Drawable
     def loadSprite(sprite)
         @spriteName = sprite
 
-        unless @@LOADED_SPRITES.has_key?(sprite)
-            @@LOADED_SPRITES[sprite] = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
+        unless Cache.Assets.has_key?(sprite)
+            Cache.Assets[sprite] = Gosu::Image.load_tiles(sprite, @tileWidth, @tileHeight)
         end
 
         # TODO das is iwie bogus
@@ -64,7 +62,7 @@ class AbstractBeing < Drawable
     end
 
     def draw(offsetX, offsetY)
-        @@LOADED_SPRITES[@spriteName][(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
+        mySprite[(((@angle + 22.5) % 360) / 45).to_i].draw_rot(@x + offsetX, @y + offsetY - 20, @z, 0.0)
     end
 
     def getProjectiles

@@ -2,6 +2,8 @@ require_relative 'Weapons/GlobWeapon.rb'
 
 class EnemyAI
     attr_accessor :enemy
+    attr_accessor :speed
+    attr_accessor :moveAngle
 
     def initialize(enemy)
         @enemy = enemy
@@ -53,7 +55,6 @@ class ChargerAI < EnemyAI
 
     def initialize(being)
 		super
-        @moveAngle = @enemy.angle
         @speed = 4#@enemy.speed
         @timer = 1 + rand(150)
     end
@@ -80,7 +81,6 @@ class BlobberAI < EnemyAI
 
     def initialize(being)
 		super
-        #@weapon = GlobberWeapon.new(self)
         @enemy.maxhp = 5
         @speed = @enemy.speed;
         @moveAngle = 0#rand(360)
@@ -118,23 +118,21 @@ class BlobberAI < EnemyAI
 end
 
 class BossAI < EnemyAI
-
 	def initialize(being)
 		super
-		@moveAngle = @enemy.angle
-		@speed = @enemy.speed
 		@enemy.maxhp = 50
-		@turnspeed = 0.5
-		@acceleration = 1.05
-		@slowdown = 0.1
-		@statetime0 = 600
+		@turnspeed = 0.15
+		@acceleration = 1.03
+		@slowdown = 0.5
+		@statetime0 = 900
 		@statetime1 = 30
+        @statetime2 = 420
 		@timer = @statetime0
 		@state = 0
 	end
-	
+
 	def update
-		@timer--
+		@timer -= 1
 		if (@state == 0)
 			@moveAngle = @enemy.angle
 			if (@timer <= 0)
@@ -147,41 +145,78 @@ class BossAI < EnemyAI
 			@moveAngle = @enemy.angle
 			if (@timer <= 0)
 				@speed = 0.1
+                @timer = @statetime2
 				@state = 2
 			end
 		end
 		if (@state == 2)
 			diff = @enemy.angle - @moveAngle
-			if (diff > 180)
-				diff -= 360
-			end
-			if (diff < -180)
-				diff += 360
-			end
-			if (@enemy.angle != @moveAngle)
-				if (diff >= 0)
-					@moveAngle += @turnspeed
-				else
-					@moveAngle -= @turnspeed
-				end
-			end
-			if (diff < 90 || diff > -90) 
-				@speed = @speed * @acceleration
+            if (diff < -180)
+                diff += 360
+            end
+            if (diff > 180)
+                diff -= 360
+            end
+
+			if (diff > 0)
+				@moveAngle += @turnspeed
 			else
-				@speed = @speed - @slowdown
+				@moveAngle -= @turnspeed
 			end
-			if (@speed <= 0)
+			if (diff > 90 || diff < -90)
+                @speed = @speed - @slowdown
+			else
+                if (@speed < (@enemy.target.width - 5))
+                    @speed = @speed * @acceleration
+                end
+			end
+			if (@speed <= 0 || @timer <= 0)
 				@speed = @enemy.speed
 				@timer = @statetime0
 				@state = 0
 			end
 		end
 	end
-	
+
 	def calcNewX
 		@enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @speed)
 	end
+
+	def calcNewY
+		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @speed)
+	end
+end
+
+class RocketAI < EnemyAI
+
+	def initialize
+		super
+		@turnspeed = 0.05
+		@turnAcceleration = 1.03
+		@speedup = 0.005
+	end
 	
+	def update
+		diff = @enemy.angle - @moveAngle
+        if (diff < -180)
+            diff += 360
+        end
+        if (diff > 180)
+            diff -= 360
+        end
+		if (diff > 0)
+			@moveAngle += @turnspeed
+		else
+			@moveAngle -= @turnspeed
+		end
+		@turnspeed += @turnAcceleration
+		@speed += @speedup
+	end
+
+	def calcNewX
+		@enemy.x + (Math.sin(@moveAngle / (180 / Math::PI)) * @speed)
+	end
+
 	def calcNewY
 		@enemy.y - (Math.cos(@moveAngle / (180 / Math::PI)) * @speed)
 	end

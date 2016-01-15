@@ -13,7 +13,7 @@ class GameWindow < Gosu::Window
         self.caption = "Rubyland #{@@VERSION}"
 
         @font = Gosu::Font.new(25, name: 'assets/Amble-Regular.ttf')
-        
+
         @highscore = Highscore.new
         mapOffsetY = 32
         @map = Map.new(@@SCREEN_WIDTH, @@SCREEN_HEIGHT - mapOffsetY, 8, @highscore)
