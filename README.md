@@ -3,7 +3,7 @@
 ![Alt text](/../master/assets/BETA%20screenshot.png?raw=true "Optional Title")
 
 
-## Installation
+## How To Play
 
 #### Supported Platforms
 * Linux
