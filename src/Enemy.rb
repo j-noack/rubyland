@@ -126,6 +126,7 @@ class BlobberEnemy < Enemy
         @weapon = GlobberWeapon.new(self)
 		@ai = BlobberAI.new(self)
         self.maxhp = 10
+		@score = 10
 	end
 
     def randomize(target)
@@ -146,6 +147,7 @@ class BossEnemy < Enemy
 		@ai = BossAI.new(self)
         @lifebar = BossLifebar.new(self)
         self.maxhp = 500
+		@score = 1000
 	end
 
     def randomize(target)
@@ -175,6 +177,7 @@ class RocketEnemy < Enemy
 		loadSprite('assets/Rocket.bmp')
 		@ai = RocketAI.new(self)
         @kamikaze = true
+		@score = 0
 	end
 
 	def randomize(target)
