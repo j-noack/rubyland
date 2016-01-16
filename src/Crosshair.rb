@@ -9,7 +9,7 @@ class Crosshair < Drawable
     def update(mouse_x, mouse_y)
         @y = mouse_y
         @x = mouse_x
-        @z = 3
+        @z = 6
     end
 
     def draw(offsetX, offsetY)
