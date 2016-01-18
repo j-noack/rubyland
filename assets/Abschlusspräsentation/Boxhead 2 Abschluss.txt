@@ -1,24 +1,22 @@
-"
-Ein weiterer Ergebnisteil der Abschlusspräsentation ist eine kurze, separate Beschreibung Ihres Projektes (inkl. aussagekräftigem Bild). 
-
+"Ein weiterer Ergebnisteil der Abschlusspräsentation ist eine kurze, separate Beschreibung Ihres Projektes (inkl. aussagekräftigem Bild). 
 Dieser Text ist zwingender Bestandteil des Gesamtpaketes
-
-Die Beschreibung soll in Stil und Länge so gehalten sein, dass wir sie als Beschreibung in der Webseite http://studentslab.de veröffentlichen können.
-
+Die Beschreibung soll in Stil und Länge so gehalten sein, dass wir sie als Beschreibung in der Webseite <http://studentslab.de> veröffentlichen können.
 Verwenden Sie bitte nur Bilder, die das Projekt gut illustrieren und zum Text passen und an denen Sie alle Rechte besitzen (z.B. selbst erstellt).
-
 Die Texte und Bilder werden auf der Webseite nur veröffentlicht, wenn die Gruppe damit ausdrücklich einverstanden ist,
- die Bereitstellung der Elemente ist aber  zwingender Bestandteil des Gesamtpaketes"
+die Bereitstellung der Elemente ist aber  zwingender Bestandteil des Gesamtpaketes"
 _______________________________________________________________________________________________________________________________________________________
 
 
 Projekt: Boxhead-Clone?
-Ziel: 2.5D Shooter?
+Ziel: 2.5D Shooter
 
-Beschreibung: Lalalala, Shooting, lalala, shotgun, lalala, boss, lalala -> "fun"
+Beschreibung: [RL] ist ein 2.5D Einzelspieler Score-Attack Shooter, inspiriert vom bekannten spiel "Boxhead" aus dem selben gerne.
+Neben Boxheads hatte auch das spiel Crimsonland (ebenfalls ein 2.5D Shooter) einfluss auf die gestaltung von [RL], speziell eine
+größere Spielkarte und höhere Gegnervielfalt. [RL] ist ein Hybrid zwischen beiden Spielen.
+[RL] features 4 different weapon types, 4 Enemy types, sound effects and even a Bossfight.
+Das Spielziel ist es so lange wie möglich zu überleben um so viele gegner wie möglich zu besiegen um einen immer besseren Highscore
+zu erringen.
 
 
-Mitglieder: Joshua Noack
-Andre Bröker
-Lukas Wansorra
-Darius Mildner
+
+Mitglieder: Joshua Noack, Andre Bröker, Lukas Wansorra, Darius Mildner
