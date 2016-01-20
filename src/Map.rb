@@ -116,8 +116,10 @@ class Map < Drawable
             @enemies.concat(@enemyGenerator.nextWave)
         end
 
-        if Gosu.button_down?(Gosu::KbDelete)
-            @enemies.each { |enemy| enemy.hp = 0 }
+        if $debug
+            if Gosu.button_down?(Gosu::KbDelete)
+                @enemies.each { |enemy| enemy.hp = 0 }
+            end
         end
     end
 

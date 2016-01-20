@@ -52,7 +52,11 @@ class GameWindow < Gosu::Window
     end
 end
 
+$debug = ARGV.any? { |arg| arg == "--debug" || arg == "-d" }
 fullscreen = ARGV.any? { |arg| arg == "--fullscreen" || arg == "-f" }
+
+puts "Debug: #{$debug}"
+puts "Fullscreen: #{fullscreen}"
 
 window = GameWindow.new(fullscreen)
 window.show
