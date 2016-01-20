@@ -8,8 +8,8 @@ class GameWindow < Gosu::Window
     @@SCREEN_WIDTH = 1366
     @@SCREEN_HEIGHT = 768
 
-    def initialize
-        super(@@SCREEN_WIDTH, @@SCREEN_HEIGHT, true)
+    def initialize(fullscreen)
+        super(@@SCREEN_WIDTH, @@SCREEN_HEIGHT, fullscreen)
         self.caption = "Rubyland #{@@VERSION}"
 
         @font = Gosu::Font.new(25, name: 'assets/Amble-Regular.ttf')
@@ -52,5 +52,7 @@ class GameWindow < Gosu::Window
     end
 end
 
-window = GameWindow.new
+fullscreen = ARGV.any? { |arg| arg == "--fullscreen" || arg == "-f" }
+
+window = GameWindow.new(fullscreen)
 window.show
